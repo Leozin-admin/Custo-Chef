@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CustoChef</title>
+</head>
+<body>
+  <script>
+    // Se tem token salvo, vai pro dashboard; senão, vai pra landing
+    if (localStorage.getItem('token')) {
+      window.location.replace('dashboard/index.html');
+    } else {
+      window.location.replace('landing/index.html');
+    }
+  </script>
+  <noscript>
+    <p>JavaScript desabilitado. <a href="landing/index.html">Ir para a página inicial</a>.</p>
+  </noscript>
+</body>
+</html>
