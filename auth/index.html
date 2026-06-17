@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CustoChef</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="container" id="tela-login">
+    <h1>🍳 CustoChef</h1>
+    <p class="subtitulo">Controle o custo do seu cardápio</p>
+
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-senha" placeholder="Senha">
+    <button onclick="fazerLogin()">Entrar</button>
+    <p class="link" onclick="mostrarCadastro()">Não tem conta? Cadastre-se</p>
+    <p class="mensagem" id="login-msg"></p>
+  </div>
+
+  <!-- CADASTRO -->
+  <div class="container" id="tela-cadastro" style="display:none">
+    <h1>🍳 CustoChef</h1>
+    <p class="subtitulo">Crie sua conta</p>
+
+    <input type="text" id="cad-nome" placeholder="Seu nome">
+    <input type="email" id="cad-email" placeholder="Email">
+    <input type="password" id="cad-senha" placeholder="Senha">
+    <button onclick="fazerCadastro()">Cadastrar</button>
+    <p class="link" onclick="mostrarLogin()">Já tem conta? Faça login</p>
+    <p class="mensagem" id="cad-msg"></p>
+  </div>
+
+  <script src="auth.js"></script>
+
+</body>
+</html>

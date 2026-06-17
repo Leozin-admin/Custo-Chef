@@ -8,7 +8,7 @@ let pratoSelecionadoId = null;
 let ingredientesCache = [];
 let pratosCache = [];
 
-if (!token) window.location.href = 'index.html';
+if (!token) window.location.href = '../auth/index.html';
 
 function mostrarCriarRestaurante() {
   const modal = document.getElementById('modal-restaurante');
@@ -251,7 +251,7 @@ function mudarAba(aba) {
 
 function fazerLogout() {
   localStorage.removeItem('token');
-  window.location.href = 'index.html';
+  window.location.href = '../auth/index.html';
 }
 
 init();

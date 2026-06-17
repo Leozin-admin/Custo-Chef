@@ -1,0 +1,57 @@
+/* =========================================================
+   auth.css — folha de estilos da tela de login/cadastro
+   ========================================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body {
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 { color: #c45c00; font-size: 28px; margin-bottom: 8px; text-align: center; }
+
+p.subtitulo { color: #888; text-align: center; margin-bottom: 32px; }
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus { border-color: #c45c00; }
+
+button {
+  width: 100%;
+  padding: 13px;
+  background: #c45c00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+button:hover { background: #a34d00; }
+
+.link { text-align: center; color: #c45c00; cursor: pointer; font-size: 14px; }
+
+.mensagem { text-align: center; margin-top: 12px; font-size: 14px; color: red; }
+.mensagem.sucesso { color: #c45c00; }
