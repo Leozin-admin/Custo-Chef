@@ -12,8 +12,43 @@ model Usuario {
   nome      String
   email     String   @unique
   senha     String
-  peso      Float?
-  altura    Float?
-  meta      Float?
   criadoEm  DateTime @default(now())
+  restaurante Restaurante?
+}
+
+model Restaurante {
+  id          Int           @id @default(autoincrement())
+  nome        String
+  usuario     Usuario       @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int           @unique
+  ingredientes Ingrediente[]
+  pratos      Prato[]
+}
+
+model Ingrediente {
+  id            Int           @id @default(autoincrement())
+  nome          String
+  unidade       String
+  precoPorUnidade Float
+  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id])
+  restauranteId Int
+  fichas        FichaTecnica[]
+}
+
+model Prato {
+  id            Int           @id @default(autoincrement())
+  nome          String
+  precoVenda    Float
+  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id])
+  restauranteId Int
+  fichas        FichaTecnica[]
+}
+
+model FichaTecnica {
+  id            Int         @id @default(autoincrement())
+  prato         Prato       @relation(fields: [pratoId], references: [id])
+  pratoId       Int
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  ingredienteId Int
+  quantidade    Float
 }
