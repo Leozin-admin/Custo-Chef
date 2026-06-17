@@ -9,7 +9,7 @@
 <body>
 
 <!-- HEADER -->
-<header class="lp-header">
+<header class="lp-header" id="lp-header">
   <h1 class="lp-logo">🍳 CustoChef</h1>
   <div class="lp-header-actions">
     <a href="../auth/index.html" class="lp-btn-cta" id="lp-entrar">Entrar</a>
@@ -18,55 +18,66 @@
 
 <!-- HERO -->
 <section class="lp-hero">
+  <!-- partículas geradas via JS -->
+  <div class="lp-particles" id="lp-particles" aria-hidden="true"></div>
+
   <div class="lp-hero-blob lp-hero-blob-1"></div>
   <div class="lp-hero-blob lp-hero-blob-2"></div>
   <div class="lp-hero-blob lp-hero-blob-3"></div>
 
   <div class="lp-hero-content">
-    <div class="lp-hero-badge">✨ Controle financeiro para restaurantes</div>
-    <h2 class="lp-hero-title">Descubra o custo<br><span class="lp-hero-highlight">real</span> do seu cardápio</h2>
-    <p class="lp-hero-subtitle">Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em segundos.</p>
+    <div class="lp-hero-badge lp-stagger" style="--stagger-delay:0ms">✨ Controle financeiro para restaurantes</div>
+    <h2 class="lp-hero-title lp-stagger" style="--stagger-delay:100ms">
+      Descubra o custo<br>real <span class="lp-shine">do seu cardápio</span>
+    </h2>
+    <p class="lp-hero-subtitle lp-stagger" style="--stagger-delay:200ms">Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em segundos.</p>
 
-    <a href="../auth/index.html" class="lp-btn-primary lp-btn-large">🚀 Começar agora — é grátis</a>
+    <a href="../auth/index.html" class="lp-btn-primary lp-btn-large lp-stagger lp-btn-ripple" style="--stagger-delay:300ms">
+      <span class="lp-btn-label">🚀 Começar agora — é grátis</span>
+    </a>
 
-    <div class="lp-hero-stats">
+    <div class="lp-hero-stats lp-stagger" style="--stagger-delay:400ms">
       <div class="lp-stat">
-        <p class="lp-stat-num">+40%</p>
+        <p class="lp-stat-num"><span class="lp-counter" data-target="40" data-prefix="+" data-suffix="%">+0%</span></p>
         <p class="lp-stat-label">de margem média</p>
       </div>
       <div class="lp-stat-divider"></div>
       <div class="lp-stat">
-        <p class="lp-stat-num">5min</p>
+        <p class="lp-stat-num"><span class="lp-counter" data-target="5" data-prefix="" data-suffix="min">0min</span></p>
         <p class="lp-stat-label">para configurar</p>
       </div>
       <div class="lp-stat-divider"></div>
       <div class="lp-stat">
-        <p class="lp-stat-num">100%</p>
+        <p class="lp-stat-num"><span class="lp-counter" data-target="100" data-prefix="" data-suffix="%">0%</span></p>
         <p class="lp-stat-label">na nuvem</p>
       </div>
     </div>
   </div>
+
+  <a href="#problema" class="lp-scroll-hint" aria-label="Rolar para baixo">
+    <span></span>
+  </a>
 </section>
 
 <!-- O PROBLEMA -->
-<section class="lp-section lp-section-cream">
+<section class="lp-section lp-section-cream" id="problema">
   <div class="lp-section-inner lp-section-narrow">
-    <div class="lp-pill lp-pill-problema">😓 O problema</div>
-    <h3 class="lp-section-title lp-section-title-dark">Você sabe quanto custa cada prato do seu cardápio?</h3>
-    <p class="lp-section-lead">A maioria dos donos de restaurante define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
+    <div class="lp-pill lp-pill-problema lp-reveal">😓 O problema</div>
+    <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Você sabe quanto custa cada prato do seu cardápio?</h3>
+    <p class="lp-section-lead lp-reveal" data-reveal-delay="200">A maioria dos donos de restaurante define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
 
     <div class="lp-problema-grid">
-      <div class="lp-problema-card">
+      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="300">
         <p class="lp-problema-emoji">😰</p>
         <p class="lp-problema-titulo">Preço no chute</p>
         <p class="lp-problema-desc">Cobra R$35 no prato mas o custo real é R$28</p>
       </div>
-      <div class="lp-problema-card">
+      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="400">
         <p class="lp-problema-emoji">📉</p>
         <p class="lp-problema-titulo">Margem invisível</p>
         <p class="lp-problema-desc">Não sabe quais pratos dão lucro e quais dão prejuízo</p>
       </div>
-      <div class="lp-problema-card">
+      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="500">
         <p class="lp-problema-emoji">🤯</p>
         <p class="lp-problema-titulo">Planilha caótica</p>
         <p class="lp-problema-desc">Tenta controlar no Excel mas desiste em 2 semanas</p>
@@ -76,15 +87,16 @@
 </section>
 
 <!-- A SOLUÇÃO -->
-<section class="lp-section lp-section-white">
+<section class="lp-section lp-section-white" id="solucao">
   <div class="lp-section-inner">
     <div class="lp-section-header">
-      <div class="lp-pill lp-pill-solucao">✅ A solução</div>
-      <h3 class="lp-section-title lp-section-title-dark">Tudo que você precisa em um só lugar</h3>
+      <div class="lp-pill lp-pill-solucao lp-reveal">✅ A solução</div>
+      <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Tudo que você precisa em um só lugar</h3>
     </div>
 
     <div class="lp-features-grid">
-      <div class="lp-feature lp-feature-ingredientes">
+      <div class="lp-feature lp-feature-ingredientes lp-reveal lp-tilt" data-reveal-delay="0">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">🥩</p>
         <p class="lp-feature-emoji">🥩</p>
         <h4 class="lp-feature-title">Ingredientes</h4>
@@ -92,7 +104,8 @@
         <div class="lp-feature-check">✓ Preço por kg, litro, unidade e muito mais</div>
       </div>
 
-      <div class="lp-feature lp-feature-ficha">
+      <div class="lp-feature lp-feature-ficha lp-reveal lp-tilt" data-reveal-delay="80">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">📋</p>
         <p class="lp-feature-emoji">📋</p>
         <h4 class="lp-feature-title">Ficha Técnica</h4>
@@ -100,7 +113,8 @@
         <div class="lp-feature-check">✓ Custo calculado automaticamente</div>
       </div>
 
-      <div class="lp-feature lp-feature-cmv">
+      <div class="lp-feature lp-feature-cmv lp-reveal lp-tilt" data-reveal-delay="160">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">📊</p>
         <p class="lp-feature-emoji">📊</p>
         <h4 class="lp-feature-title">CMV &amp; Margem</h4>
@@ -108,7 +122,8 @@
         <div class="lp-feature-check">✓ Badges: Ótima / Regular / Baixa</div>
       </div>
 
-      <div class="lp-feature lp-feature-alertas">
+      <div class="lp-feature lp-feature-alertas lp-reveal lp-tilt" data-reveal-delay="0">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">🚨</p>
         <p class="lp-feature-emoji">🚨</p>
         <h4 class="lp-feature-title">Alertas visuais</h4>
@@ -116,7 +131,8 @@
         <div class="lp-feature-check">✓ Verde, amarelo e vermelho</div>
       </div>
 
-      <div class="lp-feature lp-feature-ranking">
+      <div class="lp-feature lp-feature-ranking lp-reveal lp-tilt" data-reveal-delay="80">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">🏆</p>
         <p class="lp-feature-emoji">🏆</p>
         <h4 class="lp-feature-title">Ranking de pratos</h4>
@@ -124,7 +140,8 @@
         <div class="lp-feature-check">✓ Melhor e pior margem no topo</div>
       </div>
 
-      <div class="lp-feature lp-feature-nuvem">
+      <div class="lp-feature lp-feature-nuvem lp-reveal lp-tilt" data-reveal-delay="160">
+        <div class="lp-feature-glow"></div>
         <p class="lp-feature-emoji-bg">☁️</p>
         <p class="lp-feature-emoji">☁️</p>
         <h4 class="lp-feature-title">100% na nuvem</h4>
@@ -138,11 +155,13 @@
 <!-- CTA FINAL -->
 <section class="lp-cta-final">
   <div class="lp-section-inner lp-section-narrow lp-cta-inner">
-    <p class="lp-cta-emoji">🍳</p>
-    <h3 class="lp-cta-title">Pronto para lucrar mais?</h3>
-    <p class="lp-cta-subtitle">Configure seu restaurante agora e em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
-    <a href="../auth/index.html" class="lp-btn-primary lp-btn-xlarge">🚀 Criar meu restaurante agora</a>
-    <p class="lp-cta-foot">Grátis para começar • Sem cartão de crédito</p>
+    <p class="lp-cta-emoji lp-reveal">🍳</p>
+    <h3 class="lp-cta-title lp-reveal" data-reveal-delay="100">Pronto para lucrar mais?</h3>
+    <p class="lp-cta-subtitle lp-reveal" data-reveal-delay="200">Configure seu restaurante agora e em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
+    <a href="../auth/index.html" class="lp-btn-primary lp-btn-xlarge lp-btn-glow lp-btn-ripple lp-reveal" data-reveal-delay="300">
+      <span class="lp-btn-label">🚀 Criar meu restaurante agora</span>
+    </a>
+    <p class="lp-cta-foot lp-reveal" data-reveal-delay="400">Grátis para começar • Sem cartão de crédito</p>
   </div>
 </section>
 
