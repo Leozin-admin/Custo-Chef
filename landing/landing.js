@@ -1,19 +1,8 @@
 /* =========================================================
-   landing.js — lógica da landing (SlimTrack)
+   landing.js — header dinâmico da landing (CustoChef)
    ========================================================= */
 
-// ===== REVEAL ON SCROLL =====
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 100);
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ===== HEADER DINÂMICO: mostra apelido do usuário logado =====
 const API = 'http://localhost:3000';
-const navEntrar = document.getElementById('nav-entrar');
-const navLinks = navEntrar ? navEntrar.parentElement : null;
 
 function primeiroNome(nome) {
   if (!nome) return 'amigo';
@@ -21,23 +10,25 @@ function primeiroNome(nome) {
 }
 
 function renderUsuarioLogado(nome) {
-  if (!navLinks) return;
-  // esconde o botão "Entrar" e os links públicos
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    if (a.id !== 'nav-entrar') a.style.display = 'none';
-  });
-  navEntrar.style.display = 'none';
+  const entrar = document.getElementById('lp-entrar');
+  if (!entrar) return;
+  const acoes = entrar.parentElement;
+  if (!acoes) return;
 
+  // esconde o botão "Entrar"
+  entrar.style.display = 'none';
+
+  // cria box do usuário
   const userBox = document.createElement('div');
-  userBox.className = 'nav-user';
+  userBox.className = 'lp-user';
   userBox.innerHTML = `
-    <span>👋 Olá, <span id="nav-nome"></span></span>
-    <button class="nav-logout" id="nav-logout">Sair</button>
+    <span>👋 Olá, <span id="lp-user-nome"></span></span>
+    <button class="lp-user-logout" id="lp-logout">Sair</button>
   `;
-  navLinks.appendChild(userBox);
-  document.getElementById('nav-nome').textContent = primeiroNome(nome);
+  acoes.appendChild(userBox);
+  document.getElementById('lp-user-nome').textContent = primeiroNome(nome);
 
-  document.getElementById('nav-logout').addEventListener('click', () => {
+  document.getElementById('lp-logout').addEventListener('click', () => {
     localStorage.removeItem('token');
     window.location.reload();
   });
@@ -45,7 +36,7 @@ function renderUsuarioLogado(nome) {
 
 async function checarLogin() {
   const token = localStorage.getItem('token');
-  if (!token || !navLinks) return;
+  if (!token) return;
 
   try {
     const res = await fetch(API + '/perfil', {

@@ -1,131 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SlimTrack</title>
-<link rel="stylesheet" href="landing.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CustoChef — Controle financeiro para restaurantes</title>
+  <link rel="stylesheet" href="landing.css">
 </head>
-<body class="landing-body">
+<body>
 
-<nav>
-  <div class="nav-logo">🥗 SlimTrack</div>
-  <div class="nav-links">
-    <a href="#features">Recursos</a>
-    <a href="#como">Como funciona</a>
-    <a href="#depoimentos">Depoimentos</a>
-    <a href="../auth/index.html" class="nav-btn" id="nav-entrar">Entrar</a>
+<!-- HEADER -->
+<header class="lp-header">
+  <h1 class="lp-logo">🍳 CustoChef</h1>
+  <div class="lp-header-actions">
+    <a href="../auth/index.html" class="lp-btn-cta" id="lp-entrar">Entrar</a>
   </div>
-</nav>
+</header>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">✨ Mais de 50 mil pessoas transformadas</div>
-    <h1>Emagreça com <em>ciência</em> e consistência</h1>
-    <p>Monitore seu peso, acompanhe calorias e alcance sua meta com inteligência. O SlimTrack é seu personal trainer digital.</p>
-    <div class="hero-btns">
-      <a href="../auth/index.html" class="btn-green">🚀 Começar Grátis</a>
-      <a href="#features" class="btn-outline">Ver recursos</a>
-    </div>
-    <div class="hero-stats">
-      <div><div class="stat-num">50k+</div><div class="stat-label">Usuários ativos</div></div>
-      <div><div class="stat-num">4.9★</div><div class="stat-label">Avaliação</div></div>
-      <div><div class="stat-num">8kg</div><div class="stat-label">Perda média/mês</div></div>
-    </div>
-  </div>
-</section>
+<!-- HERO -->
+<section class="lp-hero">
+  <div class="lp-hero-blob lp-hero-blob-1"></div>
+  <div class="lp-hero-blob lp-hero-blob-2"></div>
+  <div class="lp-hero-blob lp-hero-blob-3"></div>
 
-<div class="photo-strip">
-  <div><img src="https://images.unsplash.com/photo-1581009137042-c552e485697a?w=600&q=80" alt="treino"><div class="strip-label">💪 Treino</div></div>
-  <div><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="alimentação"><div class="strip-label">🥗 Nutrição</div></div>
-  <div><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" alt="bem-estar"><div class="strip-label">🧘 Bem-estar</div></div>
-  <div><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="resultado"><div class="strip-label">🏆 Resultados</div></div>
-</div>
+  <div class="lp-hero-content">
+    <div class="lp-hero-badge">✨ Controle financeiro para restaurantes</div>
+    <h2 class="lp-hero-title">Descubra o custo<br><span class="lp-hero-highlight">real</span> do seu cardápio</h2>
+    <p class="lp-hero-subtitle">Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em segundos.</p>
 
-<section class="features reveal" id="features">
-  <div class="tag">Recursos</div>
-  <h2 class="section-title">Tudo que você precisa para <em>emagrecer</em></h2>
-  <p class="section-sub">Ferramentas poderosas, simples de usar e que realmente funcionam.</p>
-  <div class="features-grid">
-    <div class="fcard reveal">
-      <div class="fcard-img"><img src="https://images.unsplash.com/photo-1535914254981-b5012eebbd15?w=600&q=80" alt="peso"></div>
-      <div class="fcard-body"><div class="fcard-icon">⚖️</div><h3>Controle de Peso</h3><p>Registre seu peso diariamente e veja sua evolução em gráficos motivadores.</p></div>
-    </div>
-    <div class="fcard reveal">
-      <div class="fcard-img"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="dieta"></div>
-      <div class="fcard-body"><div class="fcard-icon">🍎</div><h3>Diário Alimentar</h3><p>Registre refeições e monitore calorias, proteínas e carboidratos em tempo real.</p></div>
-    </div>
-    <div class="fcard reveal">
-      <div class="fcard-img"><img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&q=80" alt="corrida"></div>
-      <div class="fcard-body"><div class="fcard-icon">🎯</div><h3>Metas Personalizadas</h3><p>Defina sua meta e receba um plano com prazos realistas baseado no seu perfil.</p></div>
-    </div>
-  </div>
-</section>
+    <a href="../auth/index.html" class="lp-btn-primary lp-btn-large">🚀 Começar agora — é grátis</a>
 
-<div class="split" id="como">
-  <div class="split-img"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" alt="resultado"></div>
-  <div class="split-content reveal">
-    <div class="tag">Como funciona</div>
-    <h2>Simples, rápido e <em style="color:#4ade80">eficaz</em></h2>
-    <p>Em apenas 3 passos você começa sua transformação e nunca mais perde o controle do seu corpo.</p>
-    <div class="checklist">
-      <div class="check-item"><div class="check-dot">✓</div>Crie sua conta grátis em menos de 1 minuto</div>
-      <div class="check-item"><div class="check-dot">✓</div>Informe seu peso, altura e meta de emagrecimento</div>
-      <div class="check-item"><div class="check-dot">✓</div>Registre diariamente e veja os resultados nos gráficos</div>
-      <div class="check-item"><div class="check-dot">✓</div>Receba lembretes e dicas personalizadas todo dia</div>
-    </div>
-    <a href="../auth/index.html" class="btn-green">Começar agora →</a>
-  </div>
-</div>
-
-<section class="testimonials reveal" id="depoimentos">
-  <div style="text-align:center">
-    <div class="tag" style="display:inline-block">Depoimentos</div>
-    <h2 class="section-title" style="text-align:center;margin-top:12px">Vidas <em>transformadas</em></h2>
-  </div>
-  <div class="t-grid">
-    <div class="tcard reveal">
-      <div class="tcard-top">
-        <img class="t-photo" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Ana">
-        <div><div class="t-name">Ana Martins</div><div class="t-result">↓ 12kg em 3 meses</div></div>
+    <div class="lp-hero-stats">
+      <div class="lp-stat">
+        <p class="lp-stat-num">+40%</p>
+        <p class="lp-stat-label">de margem média</p>
       </div>
-      <div class="stars">★★★★★</div>
-      <p>"Perdi 12kg em 3 meses. Os gráficos me motivavam a continuar mesmo nos dias mais difíceis!"</p>
-    </div>
-    <div class="tcard reveal">
-      <div class="tcard-top">
-        <img class="t-photo" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Carlos">
-        <div><div class="t-name">Carlos Silva</div><div class="t-result">↓ 8kg em 2 meses</div></div>
+      <div class="lp-stat-divider"></div>
+      <div class="lp-stat">
+        <p class="lp-stat-num">5min</p>
+        <p class="lp-stat-label">para configurar</p>
       </div>
-      <div class="stars">★★★★★</div>
-      <p>"Finalmente um app fácil de usar que realmente funciona. Atingi minha meta em 2 meses!"</p>
-    </div>
-    <div class="tcard reveal">
-      <div class="tcard-top">
-        <img class="t-photo" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Julia">
-        <div><div class="t-name">Julia Oliveira</div><div class="t-result">↓ 15kg em 4 meses</div></div>
+      <div class="lp-stat-divider"></div>
+      <div class="lp-stat">
+        <p class="lp-stat-num">100%</p>
+        <p class="lp-stat-label">na nuvem</p>
       </div>
-      <div class="stars">★★★★★</div>
-      <p>"O diário alimentar mudou minha relação com a comida. Me conscientizei do que comia sem perceber."</p>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
-  <div class="cta-bg"></div>
-  <div class="cta-overlay"></div>
-  <div class="cta-content reveal">
-    <h2>Comece sua transformação <em style="color:#4ade80">hoje</em></h2>
-    <p>Grátis para sempre. Sem cartão de crédito. Sem desculpas.</p>
-    <a href="../auth/index.html" class="btn-green">🚀 Criar conta grátis</a>
+<!-- O PROBLEMA -->
+<section class="lp-section lp-section-cream">
+  <div class="lp-section-inner lp-section-narrow">
+    <div class="lp-pill lp-pill-problema">😓 O problema</div>
+    <h3 class="lp-section-title lp-section-title-dark">Você sabe quanto custa cada prato do seu cardápio?</h3>
+    <p class="lp-section-lead">A maioria dos donos de restaurante define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
+
+    <div class="lp-problema-grid">
+      <div class="lp-problema-card">
+        <p class="lp-problema-emoji">😰</p>
+        <p class="lp-problema-titulo">Preço no chute</p>
+        <p class="lp-problema-desc">Cobra R$35 no prato mas o custo real é R$28</p>
+      </div>
+      <div class="lp-problema-card">
+        <p class="lp-problema-emoji">📉</p>
+        <p class="lp-problema-titulo">Margem invisível</p>
+        <p class="lp-problema-desc">Não sabe quais pratos dão lucro e quais dão prejuízo</p>
+      </div>
+      <div class="lp-problema-card">
+        <p class="lp-problema-emoji">🤯</p>
+        <p class="lp-problema-titulo">Planilha caótica</p>
+        <p class="lp-problema-desc">Tenta controlar no Excel mas desiste em 2 semanas</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-logo">🥗 SlimTrack</div>
-  <div class="footer-copy">© 2026 SlimTrack — Feito com 💚 para transformar vidas</div>
+<!-- A SOLUÇÃO -->
+<section class="lp-section lp-section-white">
+  <div class="lp-section-inner">
+    <div class="lp-section-header">
+      <div class="lp-pill lp-pill-solucao">✅ A solução</div>
+      <h3 class="lp-section-title lp-section-title-dark">Tudo que você precisa em um só lugar</h3>
+    </div>
+
+    <div class="lp-features-grid">
+      <div class="lp-feature lp-feature-ingredientes">
+        <p class="lp-feature-emoji-bg">🥩</p>
+        <p class="lp-feature-emoji">🥩</p>
+        <h4 class="lp-feature-title">Ingredientes</h4>
+        <p class="lp-feature-desc">Cadastre todos com preço e unidade. Atualiza um ingrediente e todos os pratos recalculam automaticamente.</p>
+        <div class="lp-feature-check">✓ Preço por kg, litro, unidade e muito mais</div>
+      </div>
+
+      <div class="lp-feature lp-feature-ficha">
+        <p class="lp-feature-emoji-bg">📋</p>
+        <p class="lp-feature-emoji">📋</p>
+        <h4 class="lp-feature-title">Ficha Técnica</h4>
+        <p class="lp-feature-desc">Monte a receita de cada prato com ingredientes e quantidades. O custo total é calculado na hora.</p>
+        <div class="lp-feature-check">✓ Custo calculado automaticamente</div>
+      </div>
+
+      <div class="lp-feature lp-feature-cmv">
+        <p class="lp-feature-emoji-bg">📊</p>
+        <p class="lp-feature-emoji">📊</p>
+        <h4 class="lp-feature-title">CMV &amp; Margem</h4>
+        <p class="lp-feature-desc">Veja o CMV e a margem de lucro de cada prato. Identifique os campeões e os vilões do seu cardápio.</p>
+        <div class="lp-feature-check">✓ Badges: Ótima / Regular / Baixa</div>
+      </div>
+
+      <div class="lp-feature lp-feature-alertas">
+        <p class="lp-feature-emoji-bg">🚨</p>
+        <p class="lp-feature-emoji">🚨</p>
+        <h4 class="lp-feature-title">Alertas visuais</h4>
+        <p class="lp-feature-desc">Sinalização colorida imediata para pratos com margem crítica. Você vê o problema antes de virar prejuízo.</p>
+        <div class="lp-feature-check">✓ Verde, amarelo e vermelho</div>
+      </div>
+
+      <div class="lp-feature lp-feature-ranking">
+        <p class="lp-feature-emoji-bg">🏆</p>
+        <p class="lp-feature-emoji">🏆</p>
+        <h4 class="lp-feature-title">Ranking de pratos</h4>
+        <p class="lp-feature-desc">Saiba qual prato é o seu campeão de margem e qual está te custando dinheiro todo dia.</p>
+        <div class="lp-feature-check">✓ Melhor e pior margem no topo</div>
+      </div>
+
+      <div class="lp-feature lp-feature-nuvem">
+        <p class="lp-feature-emoji-bg">☁️</p>
+        <p class="lp-feature-emoji">☁️</p>
+        <h4 class="lp-feature-title">100% na nuvem</h4>
+        <p class="lp-feature-desc">Seus dados salvos com segurança. Acesse do celular, tablet ou computador a qualquer hora.</p>
+        <div class="lp-feature-check">✓ Sem instalação necessária</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="lp-cta-final">
+  <div class="lp-section-inner lp-section-narrow lp-cta-inner">
+    <p class="lp-cta-emoji">🍳</p>
+    <h3 class="lp-cta-title">Pronto para lucrar mais?</h3>
+    <p class="lp-cta-subtitle">Configure seu restaurante agora e em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
+    <a href="../auth/index.html" class="lp-btn-primary lp-btn-xlarge">🚀 Criar meu restaurante agora</a>
+    <p class="lp-cta-foot">Grátis para começar • Sem cartão de crédito</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="lp-footer">
+  <div class="lp-footer-logo">🍳 CustoChef</div>
+  <div class="lp-footer-copy">© 2026 CustoChef — Feito com 🔥 para restaurantes</div>
 </footer>
 
 <script src="landing.js"></script>
