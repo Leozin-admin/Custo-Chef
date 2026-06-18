@@ -12,6 +12,12 @@
     { "src": "landing/landing.js", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/landing/landing.css", "dest": "/landing/landing.css" },
+    { "src": "/landing/landing.js", "dest": "/landing/landing.js" },
+    { "src": "/auth/auth.css", "dest": "/auth/auth.css" },
+    { "src": "/auth/auth.js", "dest": "/auth/auth.js" },
+    { "src": "/dashboard/dashboard.css", "dest": "/dashboard/dashboard.css" },
+    { "src": "/dashboard/dashboard.js", "dest": "/dashboard/dashboard.js" },
     { "src": "/", "dest": "/landing/index.html" },
     { "src": "/login", "dest": "/auth/index.html" },
     { "src": "/dashboard", "dest": "/dashboard/index.html" }
