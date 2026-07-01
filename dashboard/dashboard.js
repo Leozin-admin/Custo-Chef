@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   init();
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('assinatura') === 'sucesso') {
+    toast('Assinatura ativada! Bem-vindo ao plano pago 🎉', 'sucesso', 6000);
+    window.history.replaceState({}, '', window.location.pathname);
+  } else if (params.get('assinatura') === 'cancelada') {
+    toast('Assinatura cancelada. Você continua no plano atual.', 'info');
+    window.history.replaceState({}, '', window.location.pathname);
+  }
 });
 
 async function init() {
@@ -215,8 +223,10 @@ async function adicionarIngrediente() {
     { name: 'estoqueAtual', label: 'Estoque atual', value: parseFloat(document.getElementById('ing-estoque').value) || 0, tipo: 'number' },
     { name: 'estoqueMinimo', label: 'Estoque mínimo', value: parseFloat(document.getElementById('ing-estoque-min').value) || 0, tipo: 'number' },
     { name: 'categoria', label: 'Categoria (opcional)', value: document.getElementById('ing-categoria').value.trim() },
-    { name: 'fornecedorId', label: 'Fornecedor', value: document.getElementById('ing-fornecedor').value, tipo: 'select',
-      options: [{ value: '', label: 'Sem fornecedor' }].concat(fornecedoresCache.map(f => ({ value: f.id, label: f.nome }))) }
+    {
+      name: 'fornecedorId', label: 'Fornecedor', value: document.getElementById('ing-fornecedor').value, tipo: 'select',
+      options: [{ value: '', label: 'Sem fornecedor' }].concat(fornecedoresCache.map(f => ({ value: f.id, label: f.nome })))
+    }
   ];
 
   if (!campos[0].value || !campos[1].value || isNaN(campos[2].value)) {
@@ -269,9 +279,11 @@ async function editarIngrediente(id) {
       { name: 'estoqueAtual', label: 'Estoque atual', tipo: 'number', step: '0.01', default: ing.estoqueAtual },
       { name: 'estoqueMinimo', label: 'Estoque mínimo', tipo: 'number', step: '0.01', default: ing.estoqueMinimo },
       { name: 'categoria', label: 'Categoria', default: ing.categoria || '' },
-      { name: 'fornecedorId', label: 'Fornecedor', tipo: 'select',
+      {
+        name: 'fornecedorId', label: 'Fornecedor', tipo: 'select',
         options: [{ value: '', label: 'Sem fornecedor' }].concat(fornecedoresCache.map(f => ({ value: f.id, label: f.nome }))),
-        default: ing.fornecedorId || '' }
+        default: ing.fornecedorId || ''
+      }
     ],
     textoConfirmar: 'Salvar'
   });
@@ -293,14 +305,14 @@ async function verHistoricoPreco(id, nome) {
   const html = historico.length
     ? `<table><thead><tr><th>Data</th><th>Preço anterior</th><th>Preço novo</th><th>Variação</th><th>Por</th></tr></thead><tbody>
        ${historico.map(h => {
-         const variacao = ((h.precoNovo - h.precoAnterior) / h.precoAnterior * 100);
-         const classe = variacao > 0 ? 'cell-baix' : variacao < 0 ? 'cell-good' : '';
-         return `<tr><td>${new Date(h.dataAlteracao).toLocaleString('pt-BR')}</td>
+      const variacao = ((h.precoNovo - h.precoAnterior) / h.precoAnterior * 100);
+      const classe = variacao > 0 ? 'cell-baix' : variacao < 0 ? 'cell-good' : '';
+      return `<tr><td>${new Date(h.dataAlteracao).toLocaleString('pt-BR')}</td>
            <td>R$ ${parseFloat(h.precoAnterior).toFixed(2).replace('.', ',')}</td>
            <td>R$ ${parseFloat(h.precoNovo).toFixed(2).replace('.', ',')}</td>
            <td class="${classe}">${variacao > 0 ? '+' : ''}${variacao.toFixed(1)}%</td>
            <td>${escapeHtml(h.usuario?.nome || '—')}</td></tr>`;
-       }).join('')}</tbody></table>`
+    }).join('')}</tbody></table>`
     : '<p class="mensagem-vazia">Nenhuma alteração registrada</p>';
   document.getElementById('hist-tabela').innerHTML = html;
   document.getElementById('modal-historico').style.display = 'block';
