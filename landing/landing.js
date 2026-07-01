@@ -8,7 +8,14 @@
    - Ripple nos botões
    ========================================================= */
 
-const API = 'http://localhost:3000';
+// Detecta host: localhost em dev, mesmo origin em produção
+const API = (function () {
+  const host = window.location.hostname;
+  if (host === 'localhost' || host.startsWith('127.')) {
+    return 'http://localhost:3000';
+  }
+  return window.location.origin;
+})();
 
 // =========================================================
 // HEADER DINÂMICO (usuário logado)
@@ -38,6 +45,7 @@ function renderUsuarioLogado(nome) {
 
   document.getElementById('lp-logout').addEventListener('click', () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     window.location.reload();
   });
 }
@@ -46,11 +54,12 @@ async function checarLogin() {
   const token = localStorage.getItem('token');
   if (!token) return;
   try {
-    const res = await fetch(API + '/perfil', {
+    const res = await fetch(API + '/auth/perfil', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
     if (res.status === 401 || res.status === 403) {
       localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
       return;
     }
     if (res.ok) {
@@ -256,7 +265,47 @@ function initRipple() {
 // INIT
 // =========================================================
 
+function initSparks() {
+  const title = document.querySelector('.lp-hero-title');
+  if (!title) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+
+  function createSpark() {
+    const spark = document.createElement('span');
+    const rect = title.getBoundingClientRect();
+
+    const x = Math.random() * rect.width;
+    const y = Math.random() * rect.height;
+
+    const size = 4 + Math.random() * 6;
+    const colors = ['#ffd60a', '#ff6b35', '#ffb366', '#ffffff', '#c45c00'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    spark.style.cssText = `
+      position: fixed;
+      left: ${rect.left + x}px;
+      top: ${rect.top + y}px;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      box-shadow: 0 0 ${size * 2}px ${color};
+      animation: sparkFly 0.9s ease-out forwards;
+    `;
+
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 900);
+  }
+
+  setInterval(createSpark, 120);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  
   checarLogin();
   initReveal();
   initCounters();
@@ -264,4 +313,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initParticles();
   initRipple();
+  initSparks();
 });

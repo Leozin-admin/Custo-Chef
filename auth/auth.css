@@ -1,57 +1,276 @@
 /* =========================================================
-   auth.css — folha de estilos da tela de login/cadastro
+   auth.css — login/cadastro animado CustoChef
    ========================================================= */
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 
 body {
-  background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 100%);
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1f00 40%, #c45c00 80%, #ff6b35 100%);
+  background-size: 200% 200%;
+  animation: bgShift 12s ease-in-out infinite;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
 }
+
+@keyframes bgShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* blobs de fundo */
+body::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 350px;
+  height: 350px;
+  background: rgba(255, 179, 102, 0.15);
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: blobFloat 16s ease-in-out infinite;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: -60px;
+  width: 420px;
+  height: 420px;
+  background: rgba(255, 107, 53, 0.18);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: blobFloat 20s ease-in-out infinite reverse;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ================= CONTAINER ================= */
 
 .container {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  background: rgba(255, 255, 255, 0.97);
+  padding: 44px 40px;
+  border-radius: 24px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 179, 102, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow: hidden;
 }
 
-h1 { color: #c45c00; font-size: 28px; margin-bottom: 8px; text-align: center; }
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c45c00, #ff6b35, #ffd60a, #ff6b35, #c45c00);
+  background-size: 200% 100%;
+  animation: shineMove 3s linear infinite;
+}
 
-p.subtitulo { color: #888; text-align: center; margin-bottom: 32px; }
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shineMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ================= LOGO / TÍTULO ================= */
+
+h1 {
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #c45c00, #ff6b35, #ffd60a);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shineMove 4s linear infinite;
+  letter-spacing: -0.5px;
+}
+
+p.subtitulo {
+  color: #999;
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================= INPUTS ================= */
 
 input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  padding: 13px 16px;
+  border: 1.5px solid #e8d5c4;
+  border-radius: 12px;
+  margin-bottom: 14px;
   font-size: 15px;
   outline: none;
+  background: #fff8f3;
+  color: #1a0a00;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
-input:focus { border-color: #c45c00; }
+input::placeholder { color: #bbb; }
+
+input:focus {
+  border-color: #c45c00;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(196, 92, 0, 0.1);
+}
+
+/* ================= BOTÃO ================= */
 
 button {
   width: 100%;
-  padding: 13px;
-  background: #c45c00;
+  padding: 14px;
+  background: linear-gradient(135deg, #c45c00, #ff6b35);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(196, 92, 0, 0.4);
 }
 
-button:hover { background: #a34d00; }
+button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
 
-.link { text-align: center; color: #c45c00; cursor: pointer; font-size: 14px; }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 92, 0, 0.5);
+}
 
-.mensagem { text-align: center; margin-top: 12px; font-size: 14px; color: red; }
-.mensagem.sucesso { color: #c45c00; }
+button:hover::after { opacity: 1; }
+
+button:active { transform: translateY(0); }
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ================= LINKS ================= */
+
+.link {
+  text-align: center;
+  color: #c45c00;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+  user-select: none;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.link:hover { opacity: 0.7; text-decoration: underline; }
+
+.link-secondary {
+  text-align: center;
+  color: #999;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+  user-select: none;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.link-secondary:hover { color: #c45c00; text-decoration: underline; }
+
+/* ================= MENSAGENS ================= */
+
+.mensagem {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #e53935;
+  font-weight: 500;
+  min-height: 20px;
+}
+
+.mensagem.sucesso { color: #047857; }
+
+/* ================= DIVISOR ================= */
+
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 16px;
+  color: #ddd;
+  font-size: 12px;
+}
+
+.divisor::before,
+.divisor::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}

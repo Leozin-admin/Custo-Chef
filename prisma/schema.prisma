@@ -14,41 +14,146 @@ model Usuario {
   senha     String
   criadoEm  DateTime @default(now())
   restaurante Restaurante?
+  membro    Membro[]
+  refreshTokens RefreshToken[]
+  alteracoesPreco HistoricoPreco[]
+  recuperacaoSenha RecuperacaoSenha?
 }
 
 model Restaurante {
-  id          Int           @id @default(autoincrement())
-  nome        String
-  usuario     Usuario       @relation(fields: [usuarioId], references: [id])
-  usuarioId   Int           @unique
-  ingredientes Ingrediente[]
-  pratos      Prato[]
+  id            Int           @id @default(autoincrement())
+  nome          String
+  email         String?
+  telefone      String?
+  endereco      String?
+  cnpj          String?
+  plano         String        @default("free") // free | pro | enterprise
+  validadePlano DateTime?
+  stripeCustomerId String?    @unique
+  criadoEm      DateTime      @default(now())
+  usuario       Usuario       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId     Int           @unique
+  ingredientes  Ingrediente[]
+  pratos        Prato[]
+  fornecedores  Fornecedor[]
+  alertas       Alerta[]
+  membros       Membro[]
+}
+
+model Fornecedor {
+  id            Int           @id @default(autoincrement())
+  nome          String
+  contato       String?
+  telefone      String?
+  email         String?
+  observacoes   String?
+  criadoEm      DateTime      @default(now())
+  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
+  restauranteId Int
+  ingredientes  Ingrediente[]
 }
 
 model Ingrediente {
-  id            Int           @id @default(autoincrement())
-  nome          String
-  unidade       String
-  precoPorUnidade Float
-  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id])
-  restauranteId Int
-  fichas        FichaTecnica[]
+  id               Int           @id @default(autoincrement())
+  nome             String
+  unidade          String
+  precoPorUnidade  Float
+  estoqueAtual     Float         @default(0)
+  estoqueMinimo    Float         @default(0)
+  categoria        String?
+  criadoEm         DateTime      @default(now())
+  restaurante      Restaurante   @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
+  restauranteId    Int
+  fornecedor       Fornecedor?   @relation(fields: [fornecedorId], references: [id], onDelete: SetNull)
+  fornecedorId     Int?
+  fichas           FichaTecnica[]
+  movimentacoes    MovimentacaoEstoque[]
+  historicoPrecos  HistoricoPreco[]
 }
 
 model Prato {
   id            Int           @id @default(autoincrement())
   nome          String
+  descricao     String?
+  categoria     String?
   precoVenda    Float
-  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id])
+  tempoPreparo  Int?          // em minutos
+  rendimento    Int           @default(1)
+  criadoEm      DateTime      @default(now())
+  restaurante   Restaurante   @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
   restauranteId Int
   fichas        FichaTecnica[]
 }
 
 model FichaTecnica {
   id            Int         @id @default(autoincrement())
-  prato         Prato       @relation(fields: [pratoId], references: [id])
+  prato         Prato       @relation(fields: [pratoId], references: [id], onDelete: Cascade)
   pratoId       Int
-  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id], onDelete: Cascade)
   ingredienteId Int
   quantidade    Float
+}
+
+model MovimentacaoEstoque {
+  id            Int         @id @default(autoincrement())
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id], onDelete: Cascade)
+  ingredienteId Int
+  tipo          String      // entrada | saida | ajuste
+  quantidade    Float
+  custoUnitario Float?
+  observacao    String?
+  data          DateTime    @default(now())
+}
+
+model HistoricoPreco {
+  id             Int        @id @default(autoincrement())
+  ingrediente    Ingrediente @relation(fields: [ingredienteId], references: [id], onDelete: Cascade)
+  ingredienteId  Int
+  precoAnterior  Float
+  precoNovo      Float
+  dataAlteracao  DateTime   @default(now())
+  usuario        Usuario?   @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+  usuarioId      Int?
+}
+
+model Alerta {
+  id            Int          @id @default(autoincrement())
+  tipo          String       // estoque_baixo | margem_critica | preco_desatualizado
+  mensagem      String
+  lida          Boolean      @default(false)
+  referenciaId  Int?         // id do ingrediente/prato relacionado
+  criadaEm      DateTime     @default(now())
+  restaurante   Restaurante  @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
+  restauranteId Int
+}
+
+model Membro {
+  id              Int          @id @default(autoincrement())
+  usuario         Usuario      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId       Int
+  restaurante     Restaurante  @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
+  restauranteId   Int
+  papel           String       @default("funcionario") // dono | gerente | funcionario
+  criadoEm        DateTime     @default(now())
+
+  @@unique([usuarioId, restauranteId])
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId Int
+  expiraEm  DateTime
+  criadoEm  DateTime @default(now())
+}
+
+model RecuperacaoSenha {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  usuario   Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuarioId Int      @unique
+  expiraEm  DateTime
+  usado     Boolean  @default(false)
+  criadoEm  DateTime @default(now())
 }

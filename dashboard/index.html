@@ -1,294 +1,660 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CustoChef - Dashboard</title>
   <link rel="stylesheet" href="./dashboard.css">
 </head>
+
 <body class="dash-body">
 
-<!-- LANDING PÓS-LOGIN -->
-<div id="tela-setup" style="display:none;">
+  <!-- TELA DE SETUP (restaurante não criado) -->
+  <div id="tela-setup" style="display:none;">
 
-  <header style="background:#1a0a00; color:white; padding:16px 32px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.4);">
-    <h1 style="font-size:22px; letter-spacing:1px;">🍳 CustoChef</h1>
-    <div style="display:flex; gap:12px; align-items:center;">
-      <button onclick="mostrarCriarRestaurante()" style="background:#c45c00; color:white; border:none; padding:10px 22px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:bold;">🚀 Criar restaurante</button>
-      <button onclick="fazerLogout()" style="background:transparent; border:1px solid #666; color:#aaa; padding:10px 16px; border-radius:8px; cursor:pointer; font-size:13px;">Sair</button>
-    </div>
-  </header>
+    <header
+      style="background:#1a0a00; color:white; padding:16px 32px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.4);">
+      <h1 style="font-size:22px; letter-spacing:1px;">🍳 CustoChef</h1>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <button onclick="mostrarCriarRestaurante()"
+          style="background:#c45c00; color:white; border:none; padding:10px 22px; border-radius:8px; cursor:pointer; font-size:14px; font-weight:bold;">🚀
+          Criar restaurante</button>
+        <button onclick="logout()"
+          style="background:transparent; border:1px solid #666; color:#aaa; padding:10px 16px; border-radius:8px; cursor:pointer; font-size:13px;">Sair</button>
+      </div>
+    </header>
 
-  <!-- HERO -->
-  <div style="background:linear-gradient(135deg, #1a0a00 0%, #3d1f00 50%, #c45c00 100%); color:white; text-align:center; padding:80px 24px; position:relative; overflow:hidden;">
+    <!-- HERO -->
+    <div
+      style="background:linear-gradient(135deg, #1a0a00 0%, #3d1f00 50%, #c45c00 100%); color:white; text-align:center; padding:80px 24px; position:relative; overflow:hidden;">
 
-    <div style="position:absolute; top:-40px; left:-40px; width:200px; height:200px; background:rgba(255,255,255,0.03); border-radius:50%;"></div>
-    <div style="position:absolute; bottom:-60px; right:-30px; width:280px; height:280px; background:rgba(255,255,255,0.03); border-radius:50%;"></div>
-    <div style="position:absolute; top:20px; right:10%; width:120px; height:120px; background:rgba(196,92,0,0.15); border-radius:50%;"></div>
-
-    <div style="position:relative; z-index:1;">
-      <div style="display:inline-block; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:6px 18px; font-size:13px; margin-bottom:20px; color:#f5c89a;">✨ Controle financeiro para restaurantes</div>
-      <h2 style="font-size:48px; font-weight:900; margin-bottom:16px; line-height:1.1;">Descubra o custo<br><span style="color:#ffb366;">real</span> do seu cardápio</h2>
-      <p style="font-size:18px; color:#f5c89a; margin-bottom:40px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.6;">Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em segundos.</p>
-
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:48px;">
-        <button onclick="mostrarCriarRestaurante()" style="background:#c45c00; color:white; border:none; padding:18px 40px; border-radius:12px; font-size:18px; cursor:pointer; font-weight:bold; box-shadow:0 4px 20px rgba(196,92,0,0.5);">🚀 Começar agora — é grátis</button>
+      <div
+        style="position:absolute; top:-40px; left:-40px; width:200px; height:200px; background:rgba(255,255,255,0.03); border-radius:50%;">
+      </div>
+      <div
+        style="position:absolute; bottom:-60px; right:-30px; width:280px; height:280px; background:rgba(255,255,255,0.03); border-radius:50%;">
+      </div>
+      <div
+        style="position:absolute; top:20px; right:10%; width:120px; height:120px; background:rgba(196,92,0,0.15); border-radius:50%;">
       </div>
 
-      <!-- STATS -->
-      <div style="display:flex; gap:32px; justify-content:center; flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <p style="font-size:32px; font-weight:900; color:#ffb366;">+40%</p>
-          <p style="font-size:13px; color:#f5c89a;">de margem média</p>
-        </div>
-        <div style="width:1px; background:rgba(255,255,255,0.2);"></div>
-        <div style="text-align:center;">
-          <p style="font-size:32px; font-weight:900; color:#ffb366;">5min</p>
-          <p style="font-size:13px; color:#f5c89a;">para configurar</p>
-        </div>
-        <div style="width:1px; background:rgba(255,255,255,0.2);"></div>
-        <div style="text-align:center;">
-          <p style="font-size:32px; font-weight:900; color:#ffb366;">100%</p>
-          <p style="font-size:13px; color:#f5c89a;">na nuvem</p>
-        </div>
-      </div>
-    </div>
-  </div>
+      <div style="position:relative; z-index:1;">
+        <div
+          style="display:inline-block; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:6px 18px; font-size:13px; margin-bottom:20px; color:#f5c89a;">
+          ✨ Controle financeiro para restaurantes</div>
+        <h2 style="font-size:48px; font-weight:900; margin-bottom:16px; line-height:1.1;">Descubra o custo<br><span
+            style="color:#ffb366;">real</span> do seu cardápio</h2>
+        <p
+          style="font-size:18px; color:#f5c89a; margin-bottom:40px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.6;">
+          Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em
+          segundos.</p>
 
-  <!-- PROBLEMA -->
-  <div style="background:#fff8f3; padding:64px 24px; text-align:center;">
-    <div style="max-width:800px; margin:0 auto;">
-      <div style="display:inline-block; background:#fdecd9; color:#c45c00; border-radius:20px; padding:6px 18px; font-size:13px; font-weight:bold; margin-bottom:16px;">😓 O problema</div>
-      <h3 style="font-size:30px; color:#1a0a00; margin-bottom:16px; font-weight:800;">Você sabe quanto custa cada prato do seu cardápio?</h3>
-      <p style="color:#888; font-size:16px; line-height:1.7; margin-bottom:40px;">A maioria dos donos de restaurante define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
+        <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:48px;">
+          <button onclick="mostrarCriarRestaurante()"
+            style="background:#c45c00; color:white; border:none; padding:18px 40px; border-radius:12px; font-size:18px; cursor:pointer; font-weight:bold; box-shadow:0 4px 20px rgba(196,92,0,0.5);">🚀
+            Começar agora — é grátis</button>
+        </div>
 
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
-        <div style="background:white; border-radius:14px; padding:24px; border-left:4px solid #e53935; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-          <p style="font-size:28px; margin-bottom:8px;">😰</p>
-          <p style="font-weight:700; color:#333; margin-bottom:6px;">Preço no chute</p>
-          <p style="color:#999; font-size:13px;">Cobra R$35 no prato mas o custo real é R$28</p>
-        </div>
-        <div style="background:white; border-radius:14px; padding:24px; border-left:4px solid #e53935; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-          <p style="font-size:28px; margin-bottom:8px;">📉</p>
-          <p style="font-weight:700; color:#333; margin-bottom:6px;">Margem invisível</p>
-          <p style="color:#999; font-size:13px;">Não sabe quais pratos dão lucro e quais dão prejuízo</p>
-        </div>
-        <div style="background:white; border-radius:14px; padding:24px; border-left:4px solid #e53935; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-          <p style="font-size:28px; margin-bottom:8px;">🤯</p>
-          <p style="font-weight:700; color:#333; margin-bottom:6px;">Planilha caótica</p>
-          <p style="color:#999; font-size:13px;">Tenta controlar no Excel mas desiste em 2 semanas</p>
+        <div style="display:flex; gap:32px; justify-content:center; flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <p style="font-size:32px; font-weight:900; color:#ffb366;">+40%</p>
+            <p style="font-size:13px; color:#f5c89a;">de margem média</p>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <p style="font-size:32px; font-weight:900; color:#ffb366;">5min</p>
+            <p style="font-size:13px; color:#f5c89a;">para configurar</p>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,0.2);"></div>
+          <div style="text-align:center;">
+            <p style="font-size:32px; font-weight:900; color:#ffb366;">100%</p>
+            <p style="font-size:13px; color:#f5c89a;">na nuvem</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- SOLUÇÃO / RECURSOS -->
-  <div style="background:white; padding:64px 24px;">
-    <div style="max-width:900px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:48px;">
-        <div style="display:inline-block; background:#e8f5e9; color:#2e7d32; border-radius:20px; padding:6px 18px; font-size:13px; font-weight:bold; margin-bottom:16px;">✅ A solução</div>
-        <h3 style="font-size:30px; color:#1a0a00; font-weight:800;">Tudo que você precisa em um só lugar</h3>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #fff8f3, #fdecd9); border:1px solid #f5c89a; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">🥩</div>
-          <p style="font-size:36px; margin-bottom:12px;">🥩</p>
-          <h4 style="color:#c45c00; margin-bottom:8px; font-size:17px; font-weight:700;">Ingredientes</h4>
-          <p style="color:#7a4a1e; font-size:14px; line-height:1.6;">Cadastre todos com preço e unidade. Atualiza um ingrediente e todos os pratos recalculam automaticamente.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#c45c00; font-weight:600;">✓ Preço por kg, litro, unidade e muito mais</div>
-        </div>
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #f3f0ff, #e8e0ff); border:1px solid #c5b8ff; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">📋</div>
-          <p style="font-size:36px; margin-bottom:12px;">📋</p>
-          <h4 style="color:#5c35c4; margin-bottom:8px; font-size:17px; font-weight:700;">Ficha Técnica</h4>
-          <p style="color:#3d2580; font-size:14px; line-height:1.6;">Monte a receita de cada prato com ingredientes e quantidades. O custo total é calculado na hora.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#5c35c4; font-weight:600;">✓ Custo calculado automaticamente</div>
-        </div>
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #f0faf4, #d6f5e3); border:1px solid #86dba9; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">📊</div>
-          <p style="font-size:36px; margin-bottom:12px;">📊</p>
-          <h4 style="color:#1b7a3e; margin-bottom:8px; font-size:17px; font-weight:700;">CMV & Margem</h4>
-          <p style="color:#145530; font-size:14px; line-height:1.6;">Veja o CMV e a margem de lucro de cada prato. Identifique os campeões e os vilões do seu cardápio.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#1b7a3e; font-weight:600;">✓ Badges: Ótima / Regular / Baixa</div>
-        </div>
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #fff3f3, #ffd6d6); border:1px solid #ffaaaa; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">🚨</div>
-          <p style="font-size:36px; margin-bottom:12px;">🚨</p>
-          <h4 style="color:#c62828; margin-bottom:8px; font-size:17px; font-weight:700;">Alertas visuais</h4>
-          <p style="color:#7a1c1c; font-size:14px; line-height:1.6;">Sinalização colorida imediata para pratos com margem crítica. Você vê o problema antes de virar prejuízo.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#c62828; font-weight:600;">✓ Verde, amarelo e vermelho</div>
-        </div>
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #fff8e1, #fff0b0); border:1px solid #ffe066; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">🏆</div>
-          <p style="font-size:36px; margin-bottom:12px;">🏆</p>
-          <h4 style="color:#a07800; margin-bottom:8px; font-size:17px; font-weight:700;">Ranking de pratos</h4>
-          <p style="color:#5c4400; font-size:14px; line-height:1.6;">Saiba qual prato é o seu campeão de margem e qual está te custando dinheiro todo dia.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#a07800; font-weight:600;">✓ Melhor e pior margem no topo</div>
-        </div>
-
-        <div style="border-radius:16px; padding:28px; background:linear-gradient(135deg, #e8f4fd, #c8e8ff); border:1px solid #80c4f5; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:-20px; right:-20px; font-size:80px; opacity:0.1;">☁️</div>
-          <p style="font-size:36px; margin-bottom:12px;">☁️</p>
-          <h4 style="color:#0d5c99; margin-bottom:8px; font-size:17px; font-weight:700;">100% na nuvem</h4>
-          <p style="color:#083d66; font-size:14px; line-height:1.6;">Seus dados salvos com segurança. Acesse do celular, tablet ou computador a qualquer hora.</p>
-          <div style="margin-top:16px; background:white; border-radius:8px; padding:10px 14px; font-size:12px; color:#0d5c99; font-weight:600;">✓ Sem instalação necessária</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA FINAL -->
-  <div style="background:linear-gradient(135deg, #1a0a00, #3d1f00); padding:80px 24px; text-align:center; color:white;">
-    <div style="max-width:600px; margin:0 auto;">
-      <p style="font-size:48px; margin-bottom:16px;">🍳</p>
-      <h3 style="font-size:32px; font-weight:900; margin-bottom:16px;">Pronto para lucrar mais?</h3>
-      <p style="color:#f5c89a; font-size:16px; margin-bottom:32px; line-height:1.7;">Configure seu restaurante agora e em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
-      <button onclick="mostrarCriarRestaurante()" style="background:#c45c00; color:white; border:none; padding:20px 48px; border-radius:12px; font-size:20px; cursor:pointer; font-weight:bold; box-shadow:0 4px 24px rgba(196,92,0,0.6);">🚀 Criar meu restaurante agora</button>
-      <p style="color:#888; font-size:13px; margin-top:16px;">Grátis para começar • Sem cartão de crédito</p>
-    </div>
-  </div>
-
-  <!-- MODAL CRIAR RESTAURANTE -->
-  <div id="modal-restaurante" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:999;">
-    <div style="background:white; border-radius:20px; padding:48px 40px; width:100%; max-width:440px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-      <p style="font-size:48px; margin-bottom:8px;">🍳</p>
-      <h2 style="color:#c45c00; margin-bottom:8px; font-size:24px; font-weight:800;">Qual é o nome do seu restaurante?</h2>
-      <p style="color:#888; margin-bottom:28px; font-size:14px;">Pode ser o nome do estabelecimento ou apelido que preferir.</p>
-      <input type="text" id="nome-restaurante" placeholder="Ex: Restaurante do João" style="width:100%; padding:14px 16px; border:2px solid #f5c89a; border-radius:10px; font-size:15px; outline:none; margin-bottom:16px; text-align:center;">
-      <button onclick="criarRestaurante()" style="width:100%; padding:15px; background:#c45c00; color:white; border:none; border-radius:10px; font-size:16px; cursor:pointer; font-weight:bold; margin-bottom:12px;">🚀 Começar agora</button>
-      <p style="color:#bbb; font-size:13px; cursor:pointer;" onclick="fecharModal()">Cancelar</p>
-      <p style="color:red; margin-top:8px; font-size:13px;" id="setup-msg"></p>
-    </div>
-  </div>
-
-</div>
-
-<!-- DASHBOARD PRINCIPAL -->
-<div id="tela-dashboard">
-  <header class="dash-header">
-    <h1>🍳 CustoChef — <span id="nome-rest"></span></h1>
-    <button onclick="fazerLogout()">Sair</button>
-  </header>
-
-  <div class="dash-main">
-
-    <!-- CARDS DE RESUMO -->
-    <div class="resumo">
-      <div class="card-resumo">
-        <span>Total de pratos</span>
-        <p id="res-pratos">0</p>
-      </div>
-      <div class="card-resumo">
-        <span>Ingredientes cadastrados</span>
-        <p id="res-ingredientes">0</p>
-      </div>
-      <div class="card-resumo">
-        <span>Prato com melhor margem</span>
-        <p id="res-melhor">—</p>
-      </div>
-      <div class="card-resumo">
-        <span>Prato com pior margem</span>
-        <p id="res-pior">—</p>
+    <div style="background:#fff8f3; padding:64px 24px; text-align:center;">
+      <div style="max-width:800px; margin:0 auto;">
+        <div
+          style="display:inline-block; background:#fdecd9; color:#c45c00; border-radius:20px; padding:6px 18px; font-size:13px; font-weight:bold; margin-bottom:16px;">
+          😓 O problema</div>
+        <h3 style="font-size:30px; color:#1a0a00; margin-bottom:16px; font-weight:800;">Você sabe quanto custa cada
+          prato do seu cardápio?</h3>
+        <p style="color:#888; font-size:16px; line-height:1.7; margin-bottom:40px;">A maioria dos donos de restaurante
+          define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender
+          por quê.</p>
       </div>
     </div>
 
-    <!-- ABAS -->
-    <div class="abas">
-      <button class="aba ativa" onclick="mudarAba('ingredientes')">Ingredientes</button>
-      <button class="aba" onclick="mudarAba('pratos')">Pratos & CMV</button>
-    </div>
-
-    <!-- ABA INGREDIENTES -->
-    <div id="aba-ingredientes">
-      <div class="secao">
-        <h2>Adicionar ingrediente</h2>
-        <div class="form-inline">
-          <input type="text" id="ing-nome" placeholder="Nome (ex: Frango)">
-          <input type="text" id="ing-unidade" placeholder="Unidade (ex: kg, L, un)">
-          <input type="number" id="ing-preco" placeholder="Preço por unidade (R$)" step="0.01" min="0">
-          <button class="btn-laranja" onclick="adicionarIngrediente()">Adicionar</button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ingrediente</th>
-              <th>Unidade</th>
-              <th>Preço/unidade</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="tabela-ingredientes">
-            <tr><td colspan="4" class="mensagem-vazia">Nenhum ingrediente cadastrado</td></tr>
-          </tbody>
-        </table>
+    <div
+      style="background:linear-gradient(135deg, #1a0a00, #3d1f00); padding:80px 24px; text-align:center; color:white;">
+      <div style="max-width:600px; margin:0 auto;">
+        <p style="font-size:48px; margin-bottom:8px;">🍳</p>
+        <h3 style="font-size:32px; font-weight:900; margin-bottom:16px;">Pronto para lucrar mais?</h3>
+        <p style="color:#f5c89a; font-size:16px; margin-bottom:32px; line-height:1.7;">Configure seu restaurante agora e
+          em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
+        <button onclick="mostrarCriarRestaurante()"
+          style="background:#c45c00; color:white; border:none; padding:20px 48px; border-radius:12px; font-size:20px; cursor:pointer; font-weight:bold; box-shadow:0 4px 24px rgba(196,92,0,0.6);">🚀
+          Criar meu restaurante agora</button>
+        <p style="color:#888; font-size:13px; margin-top:16px;">Grátis para começar • Sem cartão de crédito</p>
       </div>
     </div>
 
-    <!-- ABA PRATOS -->
-    <div id="aba-pratos" class="aba-pratos-hidden">
-      <div class="secao">
-        <h2>Adicionar prato</h2>
-        <div class="form-inline">
-          <input type="text" id="prato-nome" placeholder="Nome do prato">
-          <input type="number" id="prato-preco" placeholder="Preço de venda (R$)" step="0.01" min="0">
-          <button class="btn-laranja" onclick="adicionarPrato()">Adicionar</button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Prato</th>
-              <th>Preço venda</th>
-              <th>CMV</th>
-              <th>Margem</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="tabela-pratos">
-            <tr><td colspan="6" class="mensagem-vazia">Nenhum prato cadastrado</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- FICHA TÉCNICA -->
-      <div class="secao hidden" id="secao-ficha">
-        <h2>Ficha técnica — <span id="ficha-nome-prato"></span></h2>
-        <div class="form-inline">
-          <select id="ficha-ingrediente">
-            <option value="">Selecione o ingrediente</option>
-          </select>
-          <input type="number" id="ficha-quantidade" placeholder="Quantidade usada" step="0.01" min="0">
-          <button class="btn-laranja" onclick="adicionarFicha()">Adicionar</button>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ingrediente</th>
-              <th>Quantidade</th>
-              <th>Unidade</th>
-              <th>Custo</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="tabela-ficha">
-            <tr><td colspan="5" class="mensagem-vazia">Nenhum ingrediente na ficha</td></tr>
-          </tbody>
-        </table>
-        <button class="btn-voltar" onclick="fecharFicha()">← Voltar para pratos</button>
+    <!-- MODAL CRIAR RESTAURANTE -->
+    <div id="modal-restaurante"
+      style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:999;">
+      <div
+        style="background:white; border-radius:20px; padding:48px 40px; width:100%; max-width:440px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+        <p style="font-size:48px; margin-bottom:8px;">🍳</p>
+        <h2 style="color:#c45c00; margin-bottom:8px; font-size:24px; font-weight:800;">Qual é o nome do seu restaurante?
+        </h2>
+        <p style="color:#888; margin-bottom:28px; font-size:14px;">Pode ser o nome do estabelecimento ou apelido que
+          preferir.</p>
+        <input type="text" id="nome-restaurante" placeholder="Ex: Restaurante do João"
+          style="width:100%; padding:14px 16px; border:2px solid #f5c89a; border-radius:10px; font-size:15px; outline:none; margin-bottom:16px; text-align:center;">
+        <button onclick="criarRestaurante()"
+          style="width:100%; padding:15px; background:#c45c00; color:white; border:none; border-radius:10px; font-size:16px; cursor:pointer; font-weight:bold; margin-bottom:12px;">🚀
+          Começar agora</button>
+        <p style="color:#bbb; font-size:13px; cursor:pointer;" onclick="fecharModal()">Cancelar</p>
+        <p style="color:red; margin-top:8px; font-size:13px;" id="setup-msg"></p>
       </div>
     </div>
 
   </div>
-</div>
 
-<script src="./dashboard.js"></script>
+  <!-- DASHBOARD PRINCIPAL -->
+  <div id="tela-dashboard">
+    <header class="dash-header">
+      <h1>🍳 CustoChef — <span id="nome-rest"></span></h1>
+      <div class="dash-header-actions">
+        <button id="btn-sino" class="dash-header-icon" onclick="abrirAba('alertas')" title="Alertas">
+          🔔 <span id="badge-alertas" class="dash-badge" style="display:none">0</span>
+        </button>
+        <button onclick="logout()">Sair</button>
+      </div>
+    </header>
+
+    <div class="dash-main">
+
+      <!-- ABAS -->
+      <div class="abas" id="abas-nav">
+        <button class="aba ativa" data-aba="visao-geral" onclick="abrirAba('visao-geral')">📊 Visão geral</button>
+        <button class="aba" data-aba="ingredientes" onclick="abrirAba('ingredientes')">🥩 Ingredientes</button>
+        <button class="aba" data-aba="pratos" onclick="abrirAba('pratos')">📋 Pratos</button>
+        <button class="aba" data-aba="fornecedores" onclick="abrirAba('fornecedores')">🏪 Fornecedores</button>
+        <button class="aba" data-aba="estoque" onclick="abrirAba('estoque')">📦 Estoque</button>
+        <button class="aba" data-aba="simulador" onclick="abrirAba('simulador')">💰 Simulador</button>
+        <button class="aba" data-aba="relatorios" onclick="abrirAba('relatorios')">📈 Relatórios</button>
+        <button class="aba" data-aba="equipe" onclick="abrirAba('equipe')">👥 Equipe</button>
+        <button class="aba" data-aba="config" onclick="abrirAba('config')">⚙️ Configurações</button>
+      </div>
+
+      <!-- ================== ABA: VISÃO GERAL ================== -->
+      <div id="aba-visao-geral" class="aba-painel">
+        <div class="resumo" id="kpi-grid">
+          <div class="card-resumo"><span>Ingredientes</span>
+            <p id="kpi-ingredientes">0</p>
+          </div>
+          <div class="card-resumo"><span>Pratos</span>
+            <p id="kpi-pratos">0</p>
+          </div>
+          <div class="card-resumo"><span>Pratos com ficha</span>
+            <p id="kpi-pratos-ficha">0</p>
+          </div>
+          <div class="card-resumo"><span>Margem média</span>
+            <p id="kpi-margem-media">0%</p>
+          </div>
+          <div class="card-resumo"><span>Valor do estoque</span>
+            <p id="kpi-valor-estoque">R$ 0,00</p>
+          </div>
+          <div class="card-resumo kpi-warn"><span>Estoque baixo</span>
+            <p id="kpi-estoque-baixo">0</p>
+          </div>
+          <div class="card-resumo kpi-bad"><span>Pratos críticos</span>
+            <p id="kpi-pratos-criticos">0</p>
+          </div>
+          <div class="card-resumo kpi-good"><span>Pratos ótimos</span>
+            <p id="kpi-pratos-otimos">0</p>
+          </div>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="secao">
+            <h2>🏆 Prato com melhor margem</h2>
+            <p id="res-melhor-prato" class="destaque-prato">—</p>
+          </div>
+          <div class="secao">
+            <h2>📉 Prato com pior margem</h2>
+            <p id="res-pior-prato" class="destaque-prato ruim">—</p>
+          </div>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="secao">
+            <h2>⭐ Top 5 pratos por margem</h2>
+            <ol id="top5" class="lista-ranking"></ol>
+          </div>
+          <div class="secao">
+            <h2>⚠️ Piores 5 (precisam de atenção)</h2>
+            <ol id="bottom5" class="lista-ranking ruim"></ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: INGREDIENTES ================== -->
+      <div id="aba-ingredientes" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <div class="secao-header">
+            <h2>Adicionar ingrediente</h2>
+          </div>
+          <div class="form-grid">
+            <input type="text" id="ing-nome" placeholder="Nome (ex: Frango)">
+            <input type="text" id="ing-unidade" placeholder="Unidade (ex: kg, L, un)">
+            <input type="number" id="ing-preco" placeholder="Preço por unidade (R$)" step="0.01" min="0">
+            <input type="number" id="ing-estoque" placeholder="Estoque atual" step="0.01" min="0">
+            <input type="number" id="ing-estoque-min" placeholder="Estoque mínimo" step="0.01" min="0">
+            <input type="text" id="ing-categoria" placeholder="Categoria (opcional)">
+            <select id="ing-fornecedor">
+              <option value="">Sem fornecedor</option>
+            </select>
+            <button class="btn-laranja" id="btn-add-ingrediente" onclick="adicionarIngrediente()">Adicionar</button>
+          </div>
+
+          <div class="filtros">
+            <input type="text" id="filtro-ingrediente" placeholder="🔎 Filtrar por nome..."
+              oninput="renderIngredientes()">
+          </div>
+
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingrediente</th>
+                  <th>Unidade</th>
+                  <th>Preço/un</th>
+                  <th>Estoque</th>
+                  <th>Mín.</th>
+                  <th>Categoria</th>
+                  <th>Fornecedor</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-ingredientes">
+                <tr>
+                  <td colspan="8" class="mensagem-vazia">Nenhum ingrediente cadastrado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: PRATOS ================== -->
+      <div id="aba-pratos" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <div class="secao-header">
+            <h2>Adicionar prato</h2>
+          </div>
+          <div class="form-grid form-grid-4">
+            <input type="text" id="prato-nome" placeholder="Nome do prato">
+            <input type="number" id="prato-preco" placeholder="Preço de venda (R$)" step="0.01" min="0">
+            <input type="text" id="prato-categoria" placeholder="Categoria (opcional)">
+            <input type="number" id="prato-tempo" placeholder="Tempo (min)" min="0">
+            <input type="number" id="prato-rendimento" placeholder="Rendimento" min="1" value="1">
+            <input type="text" id="prato-descricao" placeholder="Descrição (opcional)">
+            <button class="btn-laranja" id="btn-add-prato" onclick="adicionarPrato()"
+              style="grid-column: span 2;">Adicionar prato</button>
+          </div>
+
+          <div class="filtros">
+            <input type="text" id="filtro-prato" placeholder="🔎 Filtrar por nome..." oninput="renderPratos()">
+          </div>
+
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Prato</th>
+                  <th>Categoria</th>
+                  <th>Preço venda</th>
+                  <th>CMV</th>
+                  <th>Margem</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-pratos">
+                <tr>
+                  <td colspan="7" class="mensagem-vazia">Nenhum prato cadastrado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- FICHA TÉCNICA -->
+        <div class="secao hidden" id="secao-ficha">
+          <div class="secao-header">
+            <h2>📋 Ficha técnica — <span id="ficha-nome-prato"></span></h2>
+            <div class="acoes-header">
+              <button class="btn-voltar" onclick="fecharFicha()">← Voltar</button>
+              <button class="btn-laranja" onclick="exportarFichaTecnicaPDF()">📄 Baixar PDF</button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <select id="ficha-ingrediente">
+              <option value="">Selecione o ingrediente</option>
+            </select>
+            <input type="number" id="ficha-quantidade" placeholder="Quantidade usada" step="0.01" min="0">
+            <button class="btn-laranja" onclick="adicionarFicha()">Adicionar à ficha</button>
+          </div>
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingrediente</th>
+                  <th>Quantidade</th>
+                  <th>Unidade</th>
+                  <th>Preço/un</th>
+                  <th>Custo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="tabela-ficha">
+                <tr>
+                  <td colspan="6" class="mensagem-vazia">Nenhum ingrediente na ficha</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="text-align:right; font-weight:700;">CMV total:</td>
+                  <td id="ficha-cmv-total" colspan="2" style="font-weight:700; color:var(--c-orange);">R$ 0,00</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: FORNECEDORES ================== -->
+      <div id="aba-fornecedores" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <div class="secao-header">
+            <h2>Adicionar fornecedor</h2>
+          </div>
+          <div class="form-grid form-grid-4">
+            <input type="text" id="forn-nome" placeholder="Nome do fornecedor">
+            <input type="text" id="forn-contato" placeholder="Pessoa de contato">
+            <input type="text" id="forn-telefone" placeholder="Telefone">
+            <input type="email" id="forn-email" placeholder="Email">
+            <input type="text" id="forn-obs" placeholder="Observações" style="grid-column: span 3;">
+            <button class="btn-laranja" id="btn-add-forn" onclick="adicionarFornecedor()"
+              style="grid-column: span 1;">Adicionar</button>
+          </div>
+
+          <div class="filtros">
+            <input type="text" id="filtro-forn" placeholder="🔎 Filtrar por nome..." oninput="renderFornecedores()">
+          </div>
+
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Contato</th>
+                  <th>Telefone</th>
+                  <th>Email</th>
+                  <th>Ingredientes fornecidos</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-fornecedores">
+                <tr>
+                  <td colspan="6" class="mensagem-vazia">Nenhum fornecedor cadastrado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: ESTOQUE ================== -->
+      <div id="aba-estoque" class="aba-painel" style="display:none;">
+        <div class="resumo">
+          <div class="card-resumo kpi-warn"><span>Itens com estoque baixo</span>
+            <p id="estoque-baixo-count">0</p>
+          </div>
+          <div class="card-resumo"><span>Valor total do estoque</span>
+            <p id="estoque-valor-total">R$ 0,00</p>
+          </div>
+          <div class="card-resumo"><span>Movimentações (30d)</span>
+            <p id="estoque-movs-count">0</p>
+          </div>
+        </div>
+
+        <div class="duas-colunas">
+          <div class="secao">
+            <h2>📥 Nova movimentação</h2>
+            <div class="form-grid">
+              <select id="mov-ingrediente">
+                <option value="">Selecione o ingrediente</option>
+              </select>
+              <select id="mov-tipo">
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+                <option value="ajuste">Ajuste (define valor)</option>
+              </select>
+              <input type="number" id="mov-quantidade" placeholder="Quantidade" step="0.01" min="0">
+              <input type="number" id="mov-custo" placeholder="Custo unitário (opcional)" step="0.01" min="0">
+              <input type="text" id="mov-obs" placeholder="Observação (opcional)">
+              <button class="btn-laranja" onclick="registrarMovimentacao()">Registrar</button>
+            </div>
+          </div>
+
+          <div class="secao">
+            <h2>⚠️ Estoque baixo</h2>
+            <ul id="lista-estoque-baixo" class="lista-alertas"></ul>
+          </div>
+        </div>
+
+        <div class="secao">
+          <h2>📜 Histórico de movimentações</h2>
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Ingrediente</th>
+                  <th>Tipo</th>
+                  <th>Quantidade</th>
+                  <th>Custo un.</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-movs">
+                <tr>
+                  <td colspan="6" class="mensagem-vazia">Nenhuma movimentação registrada</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: SIMULADOR ================== -->
+      <div id="aba-simulador" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <h2>💰 Simulador de preço</h2>
+          <p class="subtitulo-secao">Defina a margem desejada e descubra o preço ideal para um prato.</p>
+
+          <div class="form-grid form-grid-3">
+            <select id="sim-prato" onchange="carregarFichasSimulador()">
+              <option value="">Selecione um prato</option>
+            </select>
+            <div class="input-com-sufixo">
+              <input type="number" id="sim-margem" placeholder="Margem desejada" step="0.1" min="0" max="99" value="60">
+              <span>%</span>
+            </div>
+            <button class="btn-laranja" onclick="simularPreco()">Simular</button>
+          </div>
+
+          <div id="simulador-resultado" class="simulador-resultado" style="display:none;">
+            <div class="duas-colunas">
+              <div class="card-resultado">
+                <h3>💵 Preço sugerido</h3>
+                <p class="valor-destaque" id="sim-preco-sugerido">R$ 0,00</p>
+                <p class="sub-info" id="sim-lucro">Lucro estimado: R$ 0,00</p>
+              </div>
+              <div class="card-resultado">
+                <h3>📊 CMV</h3>
+                <p class="valor-destaque" id="sim-cmv">R$ 0,00</p>
+                <p class="sub-info" id="sim-prato-nome">—</p>
+              </div>
+            </div>
+
+            <h3 class="subtitulo-secao" style="margin-top:24px;">📈 Sensibilidade de margem</h3>
+            <div class="tabela-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Variação</th>
+                    <th>Preço</th>
+                    <th>Lucro</th>
+                    <th>Margem</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-sensibilidade"></tbody>
+              </table>
+            </div>
+
+            <h3 class="subtitulo-secao" style="margin-top:24px;">📋 Composição do custo</h3>
+            <div class="tabela-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ingrediente</th>
+                    <th>Quantidade</th>
+                    <th>Unidade</th>
+                    <th>Custo</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-fichas-sim"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: RELATÓRIOS ================== -->
+      <div id="aba-relatorios" class="aba-painel" style="display:none;">
+        <div class="duas-colunas">
+          <div class="secao">
+            <h2>📄 Cardápio completo (PDF)</h2>
+            <p class="subtitulo-secao">Gera um PDF com todos os pratos, preços, CMV e margem.</p>
+            <button class="btn-laranja" onclick="exportarCardapioPDF()">⬇️ Gerar cardápio</button>
+          </div>
+          <div class="secao">
+            <h2>📊 Exportar dados</h2>
+            <p class="subtitulo-secao">Baixe uma planilha completa de ingredientes e pratos.</p>
+            <div class="acoes-relatorio">
+              <button class="btn-laranja" onclick="exportarDados('excel')">⬇️ Excel (XLS)</button>
+              <button class="btn-ghost" onclick="exportarDados('csv')">⬇️ CSV</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="secao">
+          <h2>📋 Fichas técnicas (PDF)</h2>
+          <p class="subtitulo-secao">Baixe a ficha técnica de cada prato individualmente.</p>
+          <ul id="lista-fichas-pdf" class="lista-fichas"></ul>
+        </div>
+      </div>
+
+      <!-- ================== ABA: EQUIPE ================== -->
+      <div id="aba-equipe" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <h2>👥 Membros da equipe</h2>
+          <p class="subtitulo-secao">Convide gerentes e funcionários para colaborar.</p>
+
+          <div class="form-grid form-grid-3">
+            <input type="email" id="mem-email" placeholder="Email do convidado">
+            <select id="mem-papel">
+              <option value="funcionario">Funcionário</option>
+              <option value="gerente">Gerente</option>
+            </select>
+            <button class="btn-laranja" onclick="convidarMembro()">Convidar</button>
+          </div>
+
+          <div class="tabela-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Papel</th>
+                  <th>Desde</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-membros">
+                <tr>
+                  <td colspan="5" class="mensagem-vazia">Nenhum membro cadastrado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: ALERTAS ================== -->
+      <div id="aba-alertas" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <div class="secao-header">
+            <h2>🔔 Central de alertas</h2>
+            <div class="acoes-header">
+              <button class="btn-ghost" onclick="marcarTodasAlertas()">Marcar todas como lidas</button>
+            </div>
+          </div>
+          <div id="lista-alertas"></div>
+        </div>
+      </div>
+
+      <!-- ================== ABA: CONFIGURAÇÕES ================== -->
+      <div id="aba-config" class="aba-painel" style="display:none;">
+        <div class="secao">
+          <h2>⚙️ Dados do restaurante</h2>
+          <div class="form-grid form-grid-4">
+            <input type="text" id="cfg-nome" placeholder="Nome">
+            <input type="email" id="cfg-email" placeholder="Email">
+            <input type="text" id="cfg-telefone" placeholder="Telefone">
+            <input type="text" id="cfg-cnpj" placeholder="CNPJ">
+            <textarea id="cfg-endereco" placeholder="Endereço" rows="2" style="grid-column: span 4;"></textarea>
+            <button class="btn-laranja" onclick="salvarConfigRestaurante()" style="grid-column: span 2;">Salvar
+              alterações</button>
+          </div>
+        </div>
+
+        <div class="secao">
+          <h2>💎 Seu plano</h2>
+          <p>Plano atual: <strong id="cfg-plano">Free</strong></p>
+          <p class="subtitulo-secao">Escolha o plano ideal para o seu restaurante.</p>
+          <div class="plano-info">
+            <div class="plano-card">
+              <h3>Free</h3>
+              <p>Até 10 ingredientes, 5 pratos, 1 usuário.</p>
+            </div>
+            <div class="plano-card destaque">
+              <h3>Pro <span class="badge badge-amarelo">Popular</span></h3>
+              <p>Recursos ilimitados, fornecedores, estoque e relatórios em PDF/Excel.</p>
+              <p class="plano-preco">R$ 49,90<span>/mês</span></p>
+              <button class="btn-laranja" onclick="iniciarCheckout('pro')" style="margin-top:12px; width:100%;">Assinar
+                Pro</button>
+            </div>
+            <div class="plano-card">
+              <h3>Enterprise</h3>
+              <p>Tudo do Pro, mais equipe ilimitada e simulador de precificação.</p>
+              <p class="plano-preco">R$ 129,90<span>/mês</span></p>
+              <button class="btn-laranja" onclick="iniciarCheckout('enterprise')"
+                style="margin-top:12px; width:100%;">Assinar Enterprise</button>
+            </div>
+          </div>
+          <button class="btn-ghost" id="btn-gerenciar-assinatura" onclick="abrirPortalCobranca()"
+            style="margin-top:16px; display:none;">Gerenciar assinatura</button>
+        </div>
+
+        <div class="secao">
+          <h2>👤 Seu perfil</h2>
+          <div class="form-grid form-grid-4">
+            <input type="text" id="perfil-nome" placeholder="Seu nome">
+            <input type="email" id="perfil-email" placeholder="Seu email">
+            <input type="password" id="perfil-senha-atual" placeholder="Senha atual (para alterar)">
+            <input type="password" id="perfil-nova-senha" placeholder="Nova senha (opcional)">
+            <button class="btn-laranja" onclick="salvarPerfil()" style="grid-column: span 2;">Salvar perfil</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: Histórico de preços do ingrediente -->
+  <div id="modal-historico" style="display:none;">
+    <div class="ui-modal-overlay" style="display:flex;">
+      <div class="ui-modal">
+        <button class="ui-modal-close" type="button"
+          onclick="document.getElementById('modal-historico').style.display='none'">✕</button>
+        <h3 class="ui-modal-titulo">📈 Histórico de preços — <span id="hist-nome"></span></h3>
+        <div id="hist-tabela"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./lib/api.js"></script>
+  <script src="./lib/ui.js"></script>
+  <script src="./dashboard.js"></script>
 
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CustoChef</title>
+  <title>CustoChef — Entrar</title>
   <link rel="stylesheet" href="./auth.css">
 </head>
 <body>
@@ -13,24 +13,60 @@
     <h1>🍳 CustoChef</h1>
     <p class="subtitulo">Controle o custo do seu cardápio</p>
 
-    <input type="email" id="login-email" placeholder="Email">
-    <input type="password" id="login-senha" placeholder="Senha">
-    <button onclick="fazerLogin()">Entrar</button>
+    <input type="email" id="login-email" placeholder="Email" autocomplete="email">
+    <input type="password" id="login-senha" placeholder="Senha" onkeydown="if(event.key==='Enter') fazerLogin()">
+    <button onclick="fazerLogin()" id="btn-login">
+      <span class="btn-text">Entrar</span>
+      <span class="btn-spinner" style="display:none;">⏳</span>
+    </button>
     <p class="link" onclick="mostrarCadastro()">Não tem conta? Cadastre-se</p>
+    <p class="link-secondary" onclick="mostrarRecuperar()">Esqueci minha senha</p>
     <p class="mensagem" id="login-msg"></p>
   </div>
 
   <!-- CADASTRO -->
   <div class="container" id="tela-cadastro" style="display:none">
     <h1>🍳 CustoChef</h1>
-    <p class="subtitulo">Crie sua conta</p>
+    <p class="subtitulo">Crie sua conta gratuita</p>
 
-    <input type="text" id="cad-nome" placeholder="Seu nome">
-    <input type="email" id="cad-email" placeholder="Email">
-    <input type="password" id="cad-senha" placeholder="Senha">
-    <button onclick="fazerCadastro()">Cadastrar</button>
+    <input type="text" id="cad-nome" placeholder="Seu nome" autocomplete="name">
+    <input type="email" id="cad-email" placeholder="Email" autocomplete="email">
+    <input type="password" id="cad-senha" placeholder="Senha (mín. 8 caracteres)" onkeydown="if(event.key==='Enter') fazerCadastro()">
+    <button onclick="fazerCadastro()" id="btn-cadastro">
+      <span class="btn-text">Cadastrar grátis</span>
+      <span class="btn-spinner" style="display:none;">⏳</span>
+    </button>
     <p class="link" onclick="mostrarLogin()">Já tem conta? Faça login</p>
     <p class="mensagem" id="cad-msg"></p>
+  </div>
+
+  <!-- RECUPERAR SENHA -->
+  <div class="container" id="tela-recuperar" style="display:none">
+    <h1>🔑 Recuperar senha</h1>
+    <p class="subtitulo">Vamos enviar um link para o seu email</p>
+
+    <input type="email" id="rec-email" placeholder="Seu email cadastrado" autocomplete="email">
+    <button onclick="fazerRecuperar()" id="btn-recuperar">
+      <span class="btn-text">Enviar link de recuperação</span>
+      <span class="btn-spinner" style="display:none;">⏳</span>
+    </button>
+    <p class="link" onclick="mostrarLogin()">Voltar para o login</p>
+    <p class="mensagem" id="rec-msg"></p>
+  </div>
+
+  <!-- REDEFINIR SENHA -->
+  <div class="container" id="tela-redefinir" style="display:none">
+    <h1>🔐 Nova senha</h1>
+    <p class="subtitulo">Digite sua nova senha</p>
+
+    <input type="password" id="nova-senha" placeholder="Nova senha (mín. 6 caracteres)" autocomplete="new-password">
+    <input type="password" id="confirma-senha" placeholder="Confirme a nova senha" autocomplete="new-password">
+    <button onclick="fazerRedefinir()" id="btn-redefinir">
+      <span class="btn-text">Redefinir senha</span>
+      <span class="btn-spinner" style="display:none;">⏳</span>
+    </button>
+    <p class="link" onclick="mostrarLogin()">Voltar para o login</p>
+    <p class="mensagem" id="redef-msg"></p>
   </div>
 
   <script src="./auth.js"></script>

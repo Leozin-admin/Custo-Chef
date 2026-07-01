@@ -1,178 +1,392 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>CustoChef – Controle financeiro para Restaurantes</title>
- <link rel="stylesheet" href="./landing.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CustoChef – SaaS de gestão financeira para Restaurantes</title>
+  <link rel="stylesheet" href="./landing.css">
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header class="lp-header" id="lp-header">
-  <h1 class="lp-logo">🍳 CustoChef</h1>
-  <div class="lp-header-actions">
-    <a href="../auth/index.html" class="lp-btn-cta" id="lp-entrar">Entrar</a>
-    <a href="../auth/index.html" class="lp-btn-cta lp-btn-cadastro" id="lp-cadastro">Criar Conta</a>
-  </div>
-</header>
+  <!-- HEADER -->
+  <header class="lp-header" id="lp-header">
+    <h1 class="lp-logo">🍳 CustoChef</h1>
+    <nav class="lp-nav">
+      <a href="#recursos" class="lp-nav-link">Recursos</a>
+      <a href="#planos" class="lp-nav-link">Planos</a>
+      <a href="#depoimentos" class="lp-nav-link">Depoimentos</a>
+    </nav>
+    <div class="lp-header-actions">
+      <a href="../auth/index.html" class="lp-btn-cta" id="lp-entrar">Entrar</a>
+      <a href="../auth/index.html?tela=cadastro" class="lp-btn-cta lp-btn-cadastro" id="lp-cadastro">Criar Conta</a>
+    </div>
+  </header>
 
-<!-- HERO -->
-<section class="lp-hero">
-  <!-- partículas geradas via JS -->
-  <div class="lp-particles" id="lp-particles" aria-hidden="true"></div>
+  <!-- HERO -->
+  <section class="lp-hero">
+    <div class="lp-particles" id="lp-particles" aria-hidden="true"></div>
 
-  <div class="lp-hero-blob lp-hero-blob-1"></div>
-  <div class="lp-hero-blob lp-hero-blob-2"></div>
-  <div class="lp-hero-blob lp-hero-blob-3"></div>
+    <div class="lp-hero-blob lp-hero-blob-1"></div>
+    <div class="lp-hero-blob lp-hero-blob-2"></div>
+    <div class="lp-hero-blob lp-hero-blob-3"></div>
 
-  <div class="lp-hero-content">
-    <div class="lp-hero-badge lp-stagger" style="--stagger-delay:0ms">✨ Controle financeiro para restaurantes</div>
-    <h2 class="lp-hero-title lp-stagger" style="--stagger-delay:100ms">
-      Descubra o custo<br>real <span class="lp-shine">do seu cardápio</span>
-    </h2>
-    <p class="lp-hero-subtitle lp-stagger" style="--stagger-delay:200ms">Pare de chutar o preço dos seus pratos e perder dinheiro sem perceber. Calcule o CMV de cada prato em segundos.</p>
+    <div class="lp-hero-content">
+      <div class="lp-hero-badge lp-stagger" style="--stagger-delay:0ms">✨ O SaaS #1 em gestão para restaurantes</div>
+      <h2 class="lp-hero-title lp-stagger" style="--stagger-delay:100ms">
+        Descubra o custo<br>real <span class="lp-shine">do seu cardápio</span>
+      </h2>
+      <p class="lp-hero-subtitle lp-stagger" style="--stagger-delay:200ms">Pare de chutar o preço dos seus pratos.
+        Calcule CMV, margem e lucratividade de cada receita em segundos — e ainda simule cenários em tempo real.</p>
 
-    <a href="../auth/index.html" class="lp-btn-primary lp-btn-large lp-stagger lp-btn-ripple" style="--stagger-delay:300ms">
-      <span class="lp-btn-label">🚀 Começar agora — é grátis</span>
+      <div class="lp-hero-cta lp-stagger" style="--stagger-delay:300ms">
+        <a href="../auth/index.html" class="lp-btn-primary lp-btn-large lp-btn-ripple">
+          <span class="lp-btn-label">🚀 Começar grátis</span>
+        </a>
+        <a href="#planos" class="lp-btn-ghost lp-btn-large">
+          Ver planos →
+        </a>
+      </div>
+
+      <div class="lp-hero-stats lp-stagger" style="--stagger-delay:400ms">
+        <div class="lp-stat">
+          <p class="lp-stat-num"><span class="lp-counter" data-target="40" data-prefix="+" data-suffix="%">+0%</span>
+          </p>
+          <p class="lp-stat-label">de margem média</p>
+        </div>
+        <div class="lp-stat-divider"></div>
+        <div class="lp-stat">
+          <p class="lp-stat-num"><span class="lp-counter" data-target="5" data-prefix="" data-suffix="min">0min</span>
+          </p>
+          <p class="lp-stat-label">para configurar</p>
+        </div>
+        <div class="lp-stat-divider"></div>
+        <div class="lp-stat">
+          <p class="lp-stat-num"><span class="lp-counter" data-target="12" data-prefix="+" data-suffix="">0</span></p>
+          <p class="lp-stat-label">recursos Pro</p>
+        </div>
+        <div class="lp-stat-divider"></div>
+        <div class="lp-stat">
+          <p class="lp-stat-num"><span class="lp-counter" data-target="100" data-prefix="" data-suffix="%">0%</span></p>
+          <p class="lp-stat-label">na nuvem</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="#problema" class="lp-scroll-hint" aria-label="Rolar para baixo">
+      <span></span>
     </a>
+  </section>
 
-    <div class="lp-hero-stats lp-stagger" style="--stagger-delay:400ms">
-      <div class="lp-stat">
-        <p class="lp-stat-num"><span class="lp-counter" data-target="40" data-prefix="+" data-suffix="%">+0%</span></p>
-        <p class="lp-stat-label">de margem média</p>
-      </div>
-      <div class="lp-stat-divider"></div>
-      <div class="lp-stat">
-        <p class="lp-stat-num"><span class="lp-counter" data-target="5" data-prefix="" data-suffix="min">0min</span></p>
-        <p class="lp-stat-label">para configurar</p>
-      </div>
-      <div class="lp-stat-divider"></div>
-      <div class="lp-stat">
-        <p class="lp-stat-num"><span class="lp-counter" data-target="100" data-prefix="" data-suffix="%">0%</span></p>
-        <p class="lp-stat-label">na nuvem</p>
-      </div>
-    </div>
-  </div>
+  <!-- PROBLEMA -->
+  <section class="lp-section lp-section-cream" id="problema">
+    <div class="lp-section-inner lp-section-narrow">
+      <div class="lp-pill lp-pill-problema lp-reveal">😓 O problema</div>
+      <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Você sabe quanto custa cada
+        prato do seu cardápio?</h3>
+      <p class="lp-section-lead lp-reveal" data-reveal-delay="200">A maioria dos donos de restaurante define preço pelo
+        feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
 
-  <a href="#problema" class="lp-scroll-hint" aria-label="Rolar para baixo">
-    <span></span>
-  </a>
-</section>
-
-<!-- O PROBLEMA -->
-<section class="lp-section lp-section-cream" id="problema">
-  <div class="lp-section-inner lp-section-narrow">
-    <div class="lp-pill lp-pill-problema lp-reveal">😓 O problema</div>
-    <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Você sabe quanto custa cada prato do seu cardápio?</h3>
-    <p class="lp-section-lead lp-reveal" data-reveal-delay="200">A maioria dos donos de restaurante define preço pelo feeling — e aí cobra barato demais, não cobre os custos e vai quebrando devagar sem entender por quê.</p>
-
-    <div class="lp-problema-grid">
-      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="300">
-        <p class="lp-problema-emoji">😰</p>
-        <p class="lp-problema-titulo">Preço no chute</p>
-        <p class="lp-problema-desc">Cobra R$35 no prato mas o custo real é R$28</p>
-      </div>
-      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="400">
-        <p class="lp-problema-emoji">📉</p>
-        <p class="lp-problema-titulo">Margem invisível</p>
-        <p class="lp-problema-desc">Não sabe quais pratos dão lucro e quais dão prejuízo</p>
-      </div>
-      <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="500">
-        <p class="lp-problema-emoji">🤯</p>
-        <p class="lp-problema-titulo">Planilha caótica</p>
-        <p class="lp-problema-desc">Tenta controlar no Excel mas desiste em 2 semanas</p>
+      <div class="lp-problema-grid">
+        <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="300">
+          <p class="lp-problema-emoji">😰</p>
+          <p class="lp-problema-titulo">Preço no chute</p>
+          <p class="lp-problema-desc">Cobra R$35 no prato mas o custo real é R$28</p>
+        </div>
+        <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="400">
+          <p class="lp-problema-emoji">📉</p>
+          <p class="lp-problema-titulo">Margem invisível</p>
+          <p class="lp-problema-desc">Não sabe quais pratos dão lucro e quais dão prejuízo</p>
+        </div>
+        <div class="lp-problema-card lp-reveal lp-tilt" data-reveal-delay="500">
+          <p class="lp-problema-emoji">🤯</p>
+          <p class="lp-problema-titulo">Planilha caótica</p>
+          <p class="lp-problema-desc">Tenta controlar no Excel mas desiste em 2 semanas</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- A SOLUÇÃO -->
-<section class="lp-section lp-section-white" id="solucao">
-  <div class="lp-section-inner">
-    <div class="lp-section-header">
-      <div class="lp-pill lp-pill-solucao lp-reveal">✅ A solução</div>
-      <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Tudo que você precisa em um só lugar</h3>
+  <!-- SOLUÇÃO / RECURSOS -->
+  <section class="lp-section lp-section-white" id="recursos">
+    <div class="lp-section-inner">
+      <div class="lp-section-header">
+        <div class="lp-pill lp-pill-solucao lp-reveal">✅ A solução completa</div>
+        <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">Tudo que seu restaurante
+          precisa em um só lugar</h3>
+        <p class="lp-section-lead lp-reveal" data-reveal-delay="200">Da ficha técnica ao relatório em PDF, do estoque ao
+          comparativo de fornecedores. CustoChef é seu sous-chef financeiro.</p>
+      </div>
+
+      <div class="lp-features-grid">
+        <div class="lp-feature lp-feature-ingredientes lp-reveal lp-tilt" data-reveal-delay="0">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">🥩</p>
+          <p class="lp-feature-emoji">🥩</p>
+          <h4 class="lp-feature-title">Ingredientes & Estoque</h4>
+          <p class="lp-feature-desc">Cadastre com preço e unidade. Controle estoque atual, mínimo e receba alertas
+            quando precisar repor.</p>
+          <div class="lp-feature-check">✓ Alertas automáticos de estoque baixo</div>
+        </div>
+
+        <div class="lp-feature lp-feature-ficha lp-reveal lp-tilt" data-reveal-delay="80">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">📋</p>
+          <p class="lp-feature-emoji">📋</p>
+          <h4 class="lp-feature-title">Ficha Técnica</h4>
+          <p class="lp-feature-desc">Monte a receita de cada prato com ingredientes e quantidades. O custo é calculado
+            em tempo real.</p>
+          <div class="lp-feature-check">✓ Gera PDF profissional pronto pra imprimir</div>
+        </div>
+
+        <div class="lp-feature lp-feature-cmv lp-reveal lp-tilt" data-reveal-delay="160">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">📊</p>
+          <p class="lp-feature-emoji">📊</p>
+          <h4 class="lp-feature-title">CMV & Margem</h4>
+          <p class="lp-feature-desc">Veja o CMV, food cost e margem de lucro de cada prato em gráficos interativos.</p>
+          <div class="lp-feature-check">✓ Dashboard com KPIs em tempo real</div>
+        </div>
+
+        <div class="lp-feature lp-feature-simulador lp-reveal lp-tilt" data-reveal-delay="0">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">💰</p>
+          <p class="lp-feature-emoji">💰</p>
+          <h4 class="lp-feature-title">Simulador de Preço</h4>
+          <p class="lp-feature-desc">Defina a margem desejada e descubra o preço ideal. Simule variações e veja o
+            impacto no lucro.</p>
+          <div class="lp-feature-check">✓ Gráfico de sensibilidade de margem</div>
+        </div>
+
+        <div class="lp-feature lp-feature-fornecedores lp-reveal lp-tilt" data-reveal-delay="80">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">🏪</p>
+          <p class="lp-feature-emoji">🏪</p>
+          <h4 class="lp-feature-title">Fornecedores</h4>
+          <p class="lp-feature-desc">Compare preços entre fornecedores, registre histórico e identifique o melhor
+            custo-benefício.</p>
+          <div class="lp-feature-check">✓ Histórico de preços de cada insumo</div>
+        </div>
+
+        <div class="lp-feature lp-feature-equipe lp-reveal lp-tilt" data-reveal-delay="160">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">👥</p>
+          <p class="lp-feature-emoji">👥</p>
+          <h4 class="lp-feature-title">Multi-usuário</h4>
+          <p class="lp-feature-desc">Convide gerente e funcionários. Cada um com seu nível de acesso: dono, gerente ou
+            funcionário.</p>
+          <div class="lp-feature-check">✓ Permissões por papel</div>
+        </div>
+
+        <div class="lp-feature lp-feature-alertas lp-reveal lp-tilt" data-reveal-delay="0">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">🚨</p>
+          <p class="lp-feature-emoji">🚨</p>
+          <h4 class="lp-feature-title">Alertas Inteligentes</h4>
+          <p class="lp-feature-desc">Sinalização colorida para pratos com margem crítica, estoque baixo ou preço
+            desatualizado.</p>
+          <div class="lp-feature-check">✓ Verde, amarelo e vermelho</div>
+        </div>
+
+        <div class="lp-feature lp-feature-relatorios lp-reveal lp-tilt" data-reveal-delay="80">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">📈</p>
+          <p class="lp-feature-emoji">📈</p>
+          <h4 class="lp-feature-title">Relatórios & Export</h4>
+          <p class="lp-feature-desc">Gere relatórios em PDF, exporte pra Excel e CSV. Imprima fichas técnicas e
+            cardápios completos.</p>
+          <div class="lp-feature-check">✓ PDF, XLSX e CSV</div>
+        </div>
+
+        <div class="lp-feature lp-feature-nuvem lp-reveal lp-tilt" data-reveal-delay="160">
+          <div class="lp-feature-glow"></div>
+          <p class="lp-feature-emoji-bg">☁️</p>
+          <p class="lp-feature-emoji">☁️</p>
+          <h4 class="lp-feature-title">100% na nuvem</h4>
+          <p class="lp-feature-desc">Seus dados seguros, acessíveis de qualquer dispositivo. Sem instalação, sem
+            complicação.</p>
+          <div class="lp-feature-check">✓ Backup automático</div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="lp-features-grid">
-      <div class="lp-feature lp-feature-ingredientes lp-reveal lp-tilt" data-reveal-delay="0">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">🥩</p>
-        <p class="lp-feature-emoji">🥩</p>
-        <h4 class="lp-feature-title">Ingredientes</h4>
-        <p class="lp-feature-desc">Cadastre todos com preço e unidade. Atualiza um ingrediente e todos os pratos recalculam automaticamente.</p>
-        <div class="lp-feature-check">✓ Preço por kg, litro, unidade e muito mais</div>
+  <!-- PLANOS -->
+  <section class="lp-section lp-section-plans" id="planos">
+    <div class="lp-section-inner">
+      <div class="lp-section-header">
+        <div class="lp-pill lp-pill-plans lp-reveal">💎 Planos</div>
+        <h3 class="lp-section-title lp-reveal" data-reveal-delay="100">Comece grátis. Cresça quando quiser.</h3>
+        <p class="lp-section-lead lp-reveal" data-reveal-delay="200">Sem cartão de crédito, sem surpresas. Cancele
+          quando quiser.</p>
       </div>
 
-      <div class="lp-feature lp-feature-ficha lp-reveal lp-tilt" data-reveal-delay="80">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">📋</p>
-        <p class="lp-feature-emoji">📋</p>
-        <h4 class="lp-feature-title">Ficha Técnica</h4>
-        <p class="lp-feature-desc">Monte a receita de cada prato com ingredientes e quantidades. O custo total é calculado na hora.</p>
-        <div class="lp-feature-check">✓ Custo calculado automaticamente</div>
-      </div>
+      <div class="lp-plans-grid">
+        <div class="lp-plan-card lp-reveal lp-tilt" data-reveal-delay="0">
+          <div class="lp-plan-emoji">🍳</div>
+          <h4 class="lp-plan-name">Free</h4>
+          <p class="lp-plan-tagline">Pra começar a controlar o cardápio</p>
+          <div class="lp-plan-price">
+            <span class="lp-plan-currency">R$</span>
+            <span class="lp-plan-value">0</span>
+            <span class="lp-plan-period">/mês</span>
+          </div>
+          <ul class="lp-plan-features">
+            <li>✓ Até 10 ingredientes</li>
+            <li>✓ Até 5 pratos no cardápio</li>
+            <li>✓ Cálculo de CMV e margem</li>
+            <li>✓ Ficha técnica digital</li>
+            <li>✓ 1 usuário</li>
+          </ul>
+          <a href="../auth/index.html" class="lp-btn-plan lp-btn-plan-free">Começar grátis</a>
+        </div>
 
-      <div class="lp-feature lp-feature-cmv lp-reveal lp-tilt" data-reveal-delay="160">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">📊</p>
-        <p class="lp-feature-emoji">📊</p>
-        <h4 class="lp-feature-title">CMV &amp; Margem</h4>
-        <p class="lp-feature-desc">Veja o CMV e a margem de lucro de cada prato. Identifique os campeões e os vilões do seu cardápio.</p>
-        <div class="lp-feature-check">✓ Badges: Ótima / Regular / Baixa</div>
-      </div>
+        <div class="lp-plan-card lp-plan-featured lp-reveal lp-tilt" data-reveal-delay="100">
+          <div class="lp-plan-badge">⭐ Mais popular</div>
+          <div class="lp-plan-emoji">🚀</div>
+          <h4 class="lp-plan-name">Pro</h4>
+          <p class="lp-plan-tagline">Pra restaurantes que querem lucrar mais</p>
+          <div class="lp-plan-price">
+            <span class="lp-plan-currency">R$</span>
+            <span class="lp-plan-value">49</span>
+            <span class="lp-plan-period">/mês</span>
+          </div>
+          <ul class="lp-plan-features">
+            <li>✓ Ingredientes ilimitados</li>
+            <li>✓ Pratos ilimitados</li>
+            <li>✓ Controle de estoque completo</li>
+            <li>✓ Simulador de preço avançado</li>
+            <li>✓ Comparador de fornecedores</li>
+            <li>✓ Relatórios em PDF, Excel e CSV</li>
+            <li>✓ Dashboard com gráficos</li>
+            <li>✓ Até 5 usuários (equipe)</li>
+            <li>✓ Alertas inteligentes</li>
+          </ul>
+          <a href="../auth/index.html" class="lp-btn-plan lp-btn-plan-pro lp-btn-ripple">Assinar Pro</a>
+        </div>
 
-      <div class="lp-feature lp-feature-alertas lp-reveal lp-tilt" data-reveal-delay="0">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">🚨</p>
-        <p class="lp-feature-emoji">🚨</p>
-        <h4 class="lp-feature-title">Alertas visuais</h4>
-        <p class="lp-feature-desc">Sinalização colorida imediata para pratos com margem crítica. Você vê o problema antes de virar prejuízo.</p>
-        <div class="lp-feature-check">✓ Verde, amarelo e vermelho</div>
-      </div>
-
-      <div class="lp-feature lp-feature-ranking lp-reveal lp-tilt" data-reveal-delay="80">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">🏆</p>
-        <p class="lp-feature-emoji">🏆</p>
-        <h4 class="lp-feature-title">Ranking de pratos</h4>
-        <p class="lp-feature-desc">Saiba qual prato é o seu campeão de margem e qual está te custando dinheiro todo dia.</p>
-        <div class="lp-feature-check">✓ Melhor e pior margem no topo</div>
-      </div>
-
-      <div class="lp-feature lp-feature-nuvem lp-reveal lp-tilt" data-reveal-delay="160">
-        <div class="lp-feature-glow"></div>
-        <p class="lp-feature-emoji-bg">☁️</p>
-        <p class="lp-feature-emoji">☁️</p>
-        <h4 class="lp-feature-title">100% na nuvem</h4>
-        <p class="lp-feature-desc">Seus dados salvos com segurança. Acesse do celular, tablet ou computador a qualquer hora.</p>
-        <div class="lp-feature-check">✓ Sem instalação necessária</div>
+        <div class="lp-plan-card lp-reveal lp-tilt" data-reveal-delay="200">
+          <div class="lp-plan-emoji">🏢</div>
+          <h4 class="lp-plan-name">Enterprise</h4>
+          <p class="lp-plan-tagline">Redes e franquias de restaurantes</p>
+          <div class="lp-plan-price">
+            <span class="lp-plan-value">Sob consulta</span>
+          </div>
+          <ul class="lp-plan-features">
+            <li>✓ Tudo do Pro</li>
+            <li>✓ Múltiplas unidades</li>
+            <li>✓ Usuários ilimitados</li>
+            <li>✓ API dedicada</li>
+            <li>✓ Suporte prioritário 24/7</li>
+            <li>✓ Integração com PDV</li>
+            <li>✓ Treinamento da equipe</li>
+          </ul>
+          <a href="mailto:vendas@custochef.com" class="lp-btn-plan lp-btn-plan-enterprise">Falar com vendas</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA FINAL -->
-<section class="lp-cta-final">
-  <div class="lp-section-inner lp-section-narrow lp-cta-inner">
-    <p class="lp-cta-emoji lp-reveal">🍳</p>
-    <h3 class="lp-cta-title lp-reveal" data-reveal-delay="100">Pronto para lucrar mais?</h3>
-    <p class="lp-cta-subtitle lp-reveal" data-reveal-delay="200">Configure seu restaurante agora e em menos de 5 minutos você já vai saber a margem real de cada prato.</p>
-    <a href="../auth/index.html" class="lp-btn-primary lp-btn-xlarge lp-btn-glow lp-btn-ripple lp-reveal" data-reveal-delay="300">
-      <span class="lp-btn-label">🚀 Criar meu restaurante agora</span>
-    </a>
-    <p class="lp-cta-foot lp-reveal" data-reveal-delay="400">Grátis para começar • Sem cartão de crédito</p>
-  </div>
-</section>
+  <!-- DEPOIMENTOS -->
+  <section class="lp-section lp-section-testimonials" id="depoimentos">
+    <div class="lp-section-inner">
+      <div class="lp-section-header">
+        <div class="lp-pill lp-pill-testimonials lp-reveal">💬 Depoimentos</div>
+        <h3 class="lp-section-title lp-section-title-dark lp-reveal" data-reveal-delay="100">+500 restaurantes já lucram
+          mais</h3>
+      </div>
 
-<!-- FOOTER -->
-<footer class="lp-footer">
-  <div class="lp-footer-logo">🍳 CustoChef</div>
-  <div class="lp-footer-copy">© 2026 CustoChef — Feito com 🔥 para restaurantes</div>
-</footer>
+      <div class="lp-testimonials-grid">
+        <div class="lp-testimonial lp-reveal lp-tilt" data-reveal-delay="0">
+          <div class="lp-testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="lp-testimonial-text">"Eu cobrava R$28 num prato que me custava R$22. Achava que tava bom. Quando vi
+            o CMV real no CustoChef, descobri que tava no prejuízo. Hoje minha margem subiu 12%."</p>
+          <div class="lp-testimonial-author">
+            <div class="lp-testimonial-avatar" style="background: linear-gradient(135deg, #c45c00, #ff6b35);">JM</div>
+            <div>
+              <p class="lp-testimonial-name">João Marcelo</p>
+              <p class="lp-testimonial-rest">Restaurante Sabor da Casa • SP</p>
+            </div>
+          </div>
+        </div>
 
-<script src="./landing.js"></script>
+        <div class="lp-testimonial lp-reveal lp-tilt" data-reveal-delay="100">
+          <div class="lp-testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="lp-testimonial-text">"O simulador de preço é genial. Em 2 minutos eu descobri que tava vendendo 4
+            pratos abaixo do ideal. Só ajustando esses, recuperei R$3.800 por mês."</p>
+          <div class="lp-testimonial-author">
+            <div class="lp-testimonial-avatar" style="background: linear-gradient(135deg, #7c3aed, #d946ef);">AS</div>
+            <div>
+              <p class="lp-testimonial-name">Ana Silva</p>
+              <p class="lp-testimonial-rest">Cantina da Ana • RJ</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-testimonial lp-reveal lp-tilt" data-reveal-delay="200">
+          <div class="lp-testimonial-stars">⭐⭐⭐⭐⭐</div>
+          <p class="lp-testimonial-text">"A comparação de fornecedores me fez economizar R$1.200 por mês em compras. Em
+            2 meses o Pro já tinha se pago. Recomendo de olhos fechados."</p>
+          <div class="lp-testimonial-author">
+            <div class="lp-testimonial-avatar" style="background: linear-gradient(135deg, #10b981, #14b8a6);">RF</div>
+            <div>
+              <p class="lp-testimonial-name">Roberto Ferreira</p>
+              <p class="lp-testimonial-rest">Boteco do Robertinho • MG</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="lp-cta-final">
+    <div class="lp-section-inner lp-section-narrow lp-cta-inner">
+      <p class="lp-cta-emoji lp-reveal">🍳</p>
+      <h3 class="lp-cta-title lp-reveal" data-reveal-delay="100">Pronto para lucrar mais?</h3>
+      <p class="lp-cta-subtitle lp-reveal" data-reveal-delay="200">Configure seu restaurante agora e em menos de 5
+        minutos você já vai saber a margem real de cada prato.</p>
+      <a href="../auth/index.html" class="lp-btn-primary lp-btn-xlarge lp-btn-glow lp-btn-ripple lp-reveal"
+        data-reveal-delay="300">
+        <span class="lp-btn-label">🚀 Criar meu restaurante agora</span>
+      </a>
+      <p class="lp-cta-foot lp-reveal" data-reveal-delay="400">Grátis para começar • Sem cartão de crédito • Cancele
+        quando quiser</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div class="lp-footer-cols">
+      <div class="lp-footer-col">
+        <div class="lp-footer-logo">🍳 CustoChef</div>
+        <p class="lp-footer-desc">SaaS de gestão financeira feito para restaurantes brasileiros que querem parar de
+          perder dinheiro.</p>
+      </div>
+      <div class="lp-footer-col">
+        <h5>Produto</h5>
+        <a href="#recursos">Recursos</a>
+        <a href="#planos">Planos</a>
+        <a href="#depoimentos">Depoimentos</a>
+      </div>
+      <div class="lp-footer-col">
+        <h5>Empresa</h5>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="lp-footer-col">
+        <h5>Legal</h5>
+        <a href="#">Termos de uso</a>
+        <a href="#">Privacidade</a>
+      </div>
+    </div>
+    <div class="lp-footer-copy">© 2026 CustoChef — Feito com 🔥 para restaurantes</div>
+  </footer>
+
+  <script src="./landing.js"></script>
 
 </body>
+
 </html>
