@@ -7,12 +7,12 @@
 
 const API = (function () {
   const host = window.location.hostname;
-  // Em produção (Vercel, etc.) usa o mesmo host, protocolo atual
   // Em dev local (localhost/127.0.0.1) usa localhost:3000
   if (host === 'localhost' || host.startsWith('127.')) {
     return 'http://localhost:3000';
   }
-  return window.location.origin;
+  // Em produção, o backend mora no Railway
+  return 'https://custo-chef-production.up.railway.app';
 })();
 
 const TokenStore = {
