@@ -1,4 +1,5 @@
 {
+  "framework": null,
   "rewrites": [
     { "source": "/", "destination": "/landing/index.html" },
     { "source": "/login", "destination": "/auth/index.html" },
