@@ -22,8 +22,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "prisma": "^6.19.3",
-    "stripe": "^22.3.0",
-    "resend": "^SUA_VERSAO_AQUI"
+    "resend": "^6.17.1",
+    "stripe": "^22.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
