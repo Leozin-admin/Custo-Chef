@@ -14,7 +14,7 @@
     <h1>🍳 CustoChef</h1>
     <p class="subtitulo">Controle o custo do seu cardápio</p>
 
-    <input type="email" id="login-email" placeholder="Email" autocomplete="email">
+    <input type="email" id="login-email" placeholder="Email" autocomplete="email" onkeydown="if(event.key==='Enter') fazerLogin()">
     <input type="password" id="login-senha" placeholder="Senha" onkeydown="if(event.key==='Enter') fazerLogin()">
     <button onclick="fazerLogin()" id="btn-login">
       <span class="btn-text">Entrar</span>
@@ -46,7 +46,7 @@
     <h1>🔑 Recuperar senha</h1>
     <p class="subtitulo">Vamos enviar um link para o seu email</p>
 
-    <input type="email" id="rec-email" placeholder="Seu email cadastrado" autocomplete="email">
+    <input type="email" id="rec-email" placeholder="Seu email cadastrado" autocomplete="email" onkeydown="if(event.key==='Enter') fazerRecuperar()">
     <button onclick="fazerRecuperar()" id="btn-recuperar">
       <span class="btn-text">Enviar link de recuperação</span>
       <span class="btn-spinner" style="display:none;">⏳</span>
@@ -60,8 +60,8 @@
     <h1>🔐 Nova senha</h1>
     <p class="subtitulo">Digite sua nova senha</p>
 
-    <input type="password" id="nova-senha" placeholder="Nova senha (mín. 6 caracteres)" autocomplete="new-password">
-    <input type="password" id="confirma-senha" placeholder="Confirme a nova senha" autocomplete="new-password">
+    <input type="password" id="nova-senha" placeholder="Nova senha (mín. 6 caracteres)" autocomplete="new-password" onkeydown="if(event.key==='Enter') fazerRedefinir()">
+    <input type="password" id="confirma-senha" placeholder="Confirme a nova senha" autocomplete="new-password" onkeydown="if(event.key==='Enter') fazerRedefinir()">
     <button onclick="fazerRedefinir()" id="btn-redefinir">
       <span class="btn-text">Redefinir senha</span>
       <span class="btn-spinner" style="display:none;">⏳</span>
