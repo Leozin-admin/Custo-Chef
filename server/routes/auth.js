@@ -136,11 +136,17 @@ router.post('/recuperar-senha', async (req, res) => {
     });
 
     const link = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/auth/redefinir?token=${token}`;
-    await enviarEmail(
+    const resultado = await enviarEmail(
       usuario.email,
       'CustoChef — Recuperação de senha',
       `Olá ${usuario.nome},\n\nClique no link para redefinir sua senha (válido por 1 hora):\n\n${link}\n\nSe não foi você, ignore este email.`
     );
+
+    if (resultado.ok) {
+      console.log(`[recuperar-senha] Email enviado para ${email}: sucesso${resultado.id ? ' (id: ' + resultado.id + ')' : ''}${resultado.mode ? ' (modo: ' + resultado.mode + ')' : ''}`);
+    } else {
+      console.error(`[recuperar-senha] Email enviado para ${email}: falhou`, resultado.error);
+    }
 
     res.json({ message: 'Se o email existir, você receberá as instruções' });
   } catch (err) {
