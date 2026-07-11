@@ -135,7 +135,7 @@ router.post('/recuperar-senha', async (req, res) => {
       create: { token, expiraEm, usuarioId: usuario.id }
     });
 
-    const link = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/auth/redefinir?token=${token}`;
+    const link = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/login?token=${token}`;
     const resultado = await enviarEmail(
       usuario.email,
       'CustoChef — Recuperação de senha',
