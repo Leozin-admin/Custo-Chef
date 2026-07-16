@@ -10,6 +10,38 @@ let fornecedoresCache = [];
 let pratoSelecionadoId = null;
 
 /* =========================================================
+   TEMA CLARO/ESCURO
+   ========================================================= */
+
+function aplicarTema() {
+  const temaSalvo = localStorage.getItem('custochef-tema');
+  const htmlElement = document.documentElement;
+
+  if (temaSalvo === 'dark') {
+    htmlElement.setAttribute('data-theme', 'dark');
+    document.getElementById('theme-toggle').textContent = '🌙';
+  } else {
+    htmlElement.removeAttribute('data-theme');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  }
+}
+
+function alternarTema() {
+  const htmlElement = document.documentElement;
+  const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+
+  if (isDark) {
+    htmlElement.removeAttribute('data-theme');
+    localStorage.removeItem('custochef-tema');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  } else {
+    htmlElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('custochef-tema', 'dark');
+    document.getElementById('theme-toggle').textContent = '🌙';
+  }
+}
+
+/* =========================================================
    INIT
    ========================================================= */
 
@@ -72,6 +104,10 @@ async function init() {
     carregarAlertasContador()
   ]);
   await carregarVisaoGeral();
+
+  // Inicializar tema
+  aplicarTema();
+  document.getElementById('theme-toggle').addEventListener('click', alternarTema);
 }
 
 /* =========================================================
