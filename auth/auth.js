@@ -123,7 +123,7 @@ async function fazerRecuperar() {
     const data = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      setMsg('rec-msg', 'Se o email existir, você receberá o link em instantes. (Verifique o console do servidor)', true);
+      setMsg('rec-msg', 'Se o email existir, você receberá o link em instantes.', true);
       document.getElementById('rec-email').value = '';
     } else {
       setMsg('rec-msg', data.message || 'Erro ao processar.');
