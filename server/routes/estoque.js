@@ -1,6 +1,7 @@
 const express = require('express');
 const prisma = require('../lib/prisma');
 const { verificarToken } = require('../middleware/auth');
+const { verificarAlertaEstoque } = require('../lib/alertas');
 
 const router = express.Router();
 
@@ -62,7 +63,7 @@ router.post('/movimentacoes', verificarToken, async (req, res) => {
     else if (tipo === 'saida') novoEstoque -= q;
     else if (tipo === 'ajuste') novoEstoque = q;
 
-    const [movimentacao] = await prisma.$transaction([
+    const [movimentacao, ingredienteAtualizado] = await prisma.$transaction([
       prisma.movimentacaoEstoque.create({
         data: {
           ingredienteId: ingrediente.id,
@@ -78,17 +79,7 @@ router.post('/movimentacoes', verificarToken, async (req, res) => {
       })
     ]);
 
-    // Verifica alerta de estoque baixo
-    if (ingrediente.estoqueMinimo > 0 && novoEstoque <= ingrediente.estoqueMinimo) {
-      await prisma.alerta.create({
-        data: {
-          tipo: 'estoque_baixo',
-          mensagem: `${ingrediente.nome} está com estoque baixo (${novoEstoque} ${ingrediente.unidade})`,
-          referenciaId: ingrediente.id,
-          restauranteId: restaurante.id
-        }
-      });
-    }
+    await verificarAlertaEstoque(ingredienteAtualizado);
 
     res.status(201).json(movimentacao);
   } catch (err) {

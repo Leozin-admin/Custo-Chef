@@ -1,6 +1,7 @@
 const express = require('express');
 const prisma = require('../lib/prisma');
 const { verificarToken } = require('../middleware/auth');
+const { verificarAlertaEstoque } = require('../lib/alertas');
 
 const router = express.Router();
 
@@ -48,6 +49,42 @@ router.patch('/:id/lida', verificarToken, async (req, res) => {
   } catch (err) {
     console.error('Erro em PATCH /alertas/:id/lida:', err);
     res.status(500).json({ message: 'Erro ao atualizar alerta' });
+  }
+});
+
+// POST /alertas/sincronizar — backfill: cria alertas para ingredientes que já estão
+// abaixo do mínimo hoje, sem duplicar não-lidos. Reaproveita a lógica central.
+router.post('/sincronizar', verificarToken, async (req, res) => {
+  try {
+    const restaurante = await getRestaurante(req.usuario.id);
+    if (!restaurante) return res.status(404).json({ message: 'Restaurante não encontrado' });
+
+    const ingredientes = await prisma.ingrediente.findMany({
+      where: { restauranteId: restaurante.id, estoqueMinimo: { gt: 0 } }
+    });
+
+    let criados = 0;
+    let jaExistiam = 0;
+    for (const ing of ingredientes) {
+      if (ing.estoqueAtual <= ing.estoqueMinimo) {
+        const antes = await prisma.alerta.count({
+          where: {
+            restauranteId: restaurante.id,
+            tipo: 'estoque_baixo',
+            referenciaId: ing.id,
+            lida: false
+          }
+        });
+        await verificarAlertaEstoque(ing);
+        if (antes > 0) jaExistiam++;
+        else criados++;
+      }
+    }
+
+    res.json({ ingredientesVerificados: ingredientes.length, criados, jaExistiam });
+  } catch (err) {
+    console.error('Erro em POST /alertas/sincronizar:', err);
+    res.status(500).json({ message: 'Erro ao sincronizar alertas' });
   }
 });
 
