@@ -13,6 +13,7 @@ const simuladorRoutes = require('./server/routes/simulador');
 const membrosRoutes = require('./server/routes/membros');
 const relatoriosRoutes = require('./server/routes/relatorios');
 const billingRoutes = require('./server/routes/billing');
+const alertasRoutes = require('./server/routes/alertas');
 
 const app = express();
 const { webhookHandler } = require('./server/webhook');
@@ -46,6 +47,7 @@ app.use('/simulador', simuladorRoutes);
 app.use('/membros', membrosRoutes);
 app.use('/relatorios', relatoriosRoutes);
 app.use('/billing', billingRoutes);
+app.use('/alertas', alertasRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
@@ -70,6 +72,6 @@ app.listen(PORT, () => {
   console.log(`  Auth:        /auth/{cadastro,login,perfil,refresh,recuperar-senha,redefinir-senha}`);
   console.log(`  Restaurante: /restaurante (GET, POST, PUT)`);
   console.log(`  Negocio:     /ingredientes, /pratos, /fornecedores, /membros`);
-  console.log(`  Insights:    /estoque, /dashboard, /simulador, /relatorios`);
+  console.log(`  Insights:    /estoque, /dashboard, /simulador, /relatorios, /alertas`);
   console.log(`  Billing:     /billing`);
 });
