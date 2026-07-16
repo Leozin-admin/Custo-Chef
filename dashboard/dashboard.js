@@ -237,7 +237,6 @@ async function carregarIngredientes() {
   atualizarSelectFicha();
   atualizarSelectFornecedor();
   atualizarSelectMov();
-  atualizarSelectSimulador();
 }
 
 function renderIngredientes() {
