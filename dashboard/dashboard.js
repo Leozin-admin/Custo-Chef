@@ -14,30 +14,46 @@ let pratoSelecionadoId = null;
    ========================================================= */
 
 function aplicarTema() {
-  const temaSalvo = localStorage.getItem('custochef-tema');
+  let temaSalvo = null;
+  try {
+    temaSalvo = localStorage.getItem('custochef-tema');
+  } catch (e) {
+    console.warn('Failed to read theme from localStorage:', e);
+    temaSalvo = null;
+  }
   const htmlElement = document.documentElement;
+  const toggleBtn = document.getElementById('theme-toggle');
 
   if (temaSalvo === 'dark') {
     htmlElement.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-toggle').textContent = '🌙';
+    if (toggleBtn) toggleBtn.textContent = '🌙';
   } else {
     htmlElement.removeAttribute('data-theme');
-    document.getElementById('theme-toggle').textContent = '☀️';
+    if (toggleBtn) toggleBtn.textContent = '☀️';
   }
 }
 
 function alternarTema() {
   const htmlElement = document.documentElement;
   const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+  const toggleBtn = document.getElementById('theme-toggle');
 
   if (isDark) {
     htmlElement.removeAttribute('data-theme');
-    localStorage.removeItem('custochef-tema');
-    document.getElementById('theme-toggle').textContent = '☀️';
+    try {
+      localStorage.removeItem('custochef-tema');
+    } catch (e) {
+      console.warn('Failed to remove theme from localStorage:', e);
+    }
+    if (toggleBtn) toggleBtn.textContent = '☀️';
   } else {
     htmlElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('custochef-tema', 'dark');
-    document.getElementById('theme-toggle').textContent = '🌙';
+    try {
+      localStorage.setItem('custochef-tema', 'dark');
+    } catch (e) {
+      console.warn('Failed to save theme to localStorage:', e);
+    }
+    if (toggleBtn) toggleBtn.textContent = '🌙';
   }
 }
 
@@ -107,7 +123,10 @@ async function init() {
 
   // Inicializar tema
   aplicarTema();
-  document.getElementById('theme-toggle').addEventListener('click', alternarTema);
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', alternarTema);
+  }
 }
 
 /* =========================================================
