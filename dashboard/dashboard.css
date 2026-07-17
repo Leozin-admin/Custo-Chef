@@ -973,27 +973,36 @@ tfoot td {
 
 /* ================= DARK THEME ================= */
 [data-theme="dark"] {
-  --c-bg: #121212;
-  --c-text: #e0e0e0;
-  --c-brown: #1a0a00;
-  --c-brown-2: #2d1a00;
-  --c-orange: #ffb366;
+  /* Paleta neutra cinza escuro (estilo Claude.ai) */
+  --c-bg: #2a2a28;          /* fundo principal */
+  --c-text: #ececea;         /* texto principal */
+  --c-brown: #3a3937;        /* superfície elevada (cards, seções) */
+  --c-brown-2: #333230;      /* surface alternativa, hover, th */
+  --c-orange: #ff9f5a;       /* laranja da marca (um pouco mais quente) */
   --c-orange-bright: #ff8c42;
-  --c-cream: #2b2b2b;
-  --c-muted: #aaa;
-  --c-border: #444;
+  --c-cream: #333230;        /* substitui o cream claro por surface escuro */
+  --c-muted: #a8a8a6;        /* texto secundário com contraste confortável */
+  --c-border: #4a4a47;       /* bordas neutras */
   --c-verde: #66bb6a;
   --c-vermelho: #ef5350;
   --c-amarelo: #ffb74d;
-  --c-cinza: #9e9e9e;
+  --c-cinza: #b0b0ae;
 }
 
-/* Adjust header gradient for dark theme */
+/* Header com fundo neutro e toque laranja no final (mantém identidade da marca) */
 [data-theme="dark"] .dash-header {
-  background: linear-gradient(135deg, var(--c-brown) 0%, var(--c-brown-2) 60%, var(--c-orange) 100%);
+  background: linear-gradient(135deg, var(--c-brown) 0%, #434240 60%, var(--c-orange) 100%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+[data-theme="dark"] .dash-header h1 {
+  background: linear-gradient(90deg, #ffb366, #ffd60a, #ff8c42);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-/* Ensure text colors adjust */
 [data-theme="dark"] .dash-header button,
 [data-theme="dark"] .dash-header-icon {
   border-color: rgba(255,255,255,0.3);
@@ -1003,62 +1012,226 @@ tfoot td {
   background: rgba(255,255,255,0.15);
   border-color: rgba(255,255,255,0.5);
 }
-
-/* Adjust badge border */
 [data-theme="dark"] .dash-badge {
-  border: 2px solid var(--c-brown-2);
+  border: 2px solid var(--c-brown);
 }
 
-/* Adjust some components for dark background */
+/* Cards de KPI e seções em surface elevada */
 [data-theme="dark"] .card-resumo,
 [data-theme="dark"] .secao,
 [data-theme="dark"] .plano-card,
 [data-theme="dark"] .ui-modal,
-[data-theme="dark"] #modal-restaurante,
-[data-theme="dark"] #modal-historico .ui-modal-overlay {
-  background: var(--c-bg);
+[data-theme="dark"] .abas {
+  background: var(--c-brown);
   border-color: var(--c-border);
   color: var(--c-text);
 }
+
+/* Borda superior dos cards KPI suavizada (mais fina, sem animação brilhante) */
 [data-theme="dark"] .card-resumo::before {
-  background: linear-gradient(90deg, var(--c-orange), var(--c-orange-bright), #ffd60a);
+  background: var(--c-orange);
+  height: 2px;
+  opacity: 0.7;
+  animation: none;
+}
+
+/* Labels (spans) dos cards com contraste mais confortável */
+[data-theme="dark"] .card-resumo span {
+  color: var(--c-muted);
 }
 [data-theme="dark"] .card-resumo p {
   color: var(--c-orange);
 }
-[data-theme="dark"] .badge-verde { background: #1b5e20; color: #a5d6a7; }
-[data-theme="dark"] .badge-vermelho { background: #4e0000; color: #ef9a9a; }
-[data-theme="dark"] .badge-amarelo { background: #4e3400; color: #ffee93; }
-[data-theme="dark"] .badge-cinza { background: #424242; color: #e0e0e0; }
+
+/* Linhas laterais coloridas dos KPIs (warn/bad/good) levemente mais suaves */
+[data-theme="dark"] .card-resumo.kpi-warn { border-left-color: var(--c-amarelo); opacity: 0.95; }
+[data-theme="dark"] .card-resumo.kpi-bad  { border-left-color: var(--c-vermelho); opacity: 0.95; }
+[data-theme="dark"] .card-resumo.kpi-good { border-left-color: var(--c-verde); opacity: 0.95; }
+
+/* Títulos das seções com cor clara para destacar */
+[data-theme="dark"] .secao h2,
+[data-theme="dark"] .ui-modal-titulo {
+  color: var(--c-text);
+}
+[data-theme="dark"] .subtitulo-secao {
+  color: var(--c-muted);
+}
+
+/* Abas: aba ativa continua com gradient laranja, inativa em cinza claro */
+[data-theme="dark"] .aba {
+  color: var(--c-muted);
+}
+[data-theme="dark"] .aba:hover {
+  color: var(--c-orange);
+  background: rgba(255, 159, 90, 0.08);
+}
+[data-theme="dark"] .aba.ativa {
+  background: linear-gradient(135deg, var(--c-orange), var(--c-orange-bright));
+  color: #fff;
+}
+
+/* Tabela e inputs em surface escuro */
 [data-theme="dark"] .tabela-wrapper,
 [data-theme="dark"] .form-grid,
 [data-theme="dark"] .input-com-sufixo input,
-[data-theme="dark"] .filtros input {
+[data-theme="dark"] .filtros input,
+[data-theme="dark"] .form-grid input,
+[data-theme="dark"] .form-grid select,
+[data-theme="dark"] .form-grid textarea {
   background: var(--c-bg);
   border-color: var(--c-border);
   color: var(--c-text);
 }
+[data-theme="dark"] .form-grid {
+  background: var(--c-brown-2);
+  border-color: var(--c-border);
+}
+[data-theme="dark"] .form-grid input::placeholder,
+[data-theme="dark"] .filtros input::placeholder {
+  color: var(--c-muted);
+}
+[data-theme="dark"] .tabela-wrapper {
+  border-color: var(--c-border);
+}
 [data-theme="dark"] .tabela-wrapper th {
-  background: var(--c-brown);
+  background: var(--c-brown-2);
+  color: var(--c-muted);
+  border-bottom-color: var(--c-border);
 }
 [data-theme="dark"] .tabela-wrapper td {
-  border-bottom: 1px solid var(--c-brown);
+  color: var(--c-text);
+  border-bottom-color: var(--c-border);
 }
 [data-theme="dark"] .tabela-wrapper tr:hover td {
-  background: var(--c-brown-2);
+  background: rgba(255, 159, 90, 0.06);
 }
+[data-theme="dark"] tfoot td {
+  background: var(--c-brown-2);
+  color: var(--c-text);
+}
+
+/* Badges em dark */
+[data-theme="dark"] .badge-verde { background: rgba(102, 187, 106, 0.15); color: #a5d6a7; }
+[data-theme="dark"] .badge-vermelho { background: rgba(239, 83, 80, 0.15); color: #ef9a9a; }
+[data-theme="dark"] .badge-amarelo { background: rgba(255, 183, 77, 0.15); color: #ffe082; }
+[data-theme="dark"] .badge-cinza { background: rgba(255, 255, 255, 0.08); color: #d0d0ce; }
+
+/* Mensagem vazia com cor mais visível */
+[data-theme="dark"] .mensagem-vazia {
+  color: var(--c-muted);
+}
+
+/* Botões: laranja mantém gradiente, ghost e mini em surface escuro */
 [data-theme="dark"] .btn-laranja {
   background: linear-gradient(135deg, var(--c-orange), var(--c-orange-bright));
+  color: #1a0a00;
 }
 [data-theme="dark"] .btn-ghost {
   border-color: var(--c-border);
   color: var(--c-text);
+  background: transparent;
 }
 [data-theme="dark"] .btn-ghost:hover {
   border-color: var(--c-orange);
   color: var(--c-orange);
 }
-[data-theme="dark"] .toast {
+[data-theme="dark"] .btn-mini {
   background: var(--c-bg);
+  border-color: var(--c-border);
   color: var(--c-text);
+}
+[data-theme="dark"] .btn-mini:hover {
+  border-color: var(--c-orange);
+  color: var(--c-orange);
+}
+[data-theme="dark"] .btn-icon:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Toast */
+[data-theme="dark"] .ui-toast {
+  background: var(--c-brown);
+  color: var(--c-text);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Modal: corpo, labels e inputs */
+[data-theme="dark"] .ui-modal-corpo {
+  color: #cfcfcd;
+}
+[data-theme="dark"] .ui-prompt-label,
+[data-theme="dark"] .ui-form-grupo label {
+  color: var(--c-text);
+}
+[data-theme="dark"] .ui-prompt-input,
+[data-theme="dark"] .ui-form-grupo input,
+[data-theme="dark"] .ui-form-grupo select,
+[data-theme="dark"] .ui-form-grupo textarea {
+  background: var(--c-bg);
+  border-color: var(--c-border);
+  color: var(--c-text);
+}
+[data-theme="dark"] .ui-prompt-input::placeholder,
+[data-theme="dark"] .ui-form-grupo input::placeholder {
+  color: var(--c-muted);
+}
+[data-theme="dark"] .ui-modal-close {
+  color: var(--c-muted);
+}
+[data-theme="dark"] .ui-modal-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--c-text);
+}
+
+/* Destaque de prato, simulador, relatórios e ranking */
+[data-theme="dark"] .destaque-prato,
+[data-theme="dark"] .card-resultado,
+[data-theme="dark"] .item-relatorio {
+  background: var(--c-brown-2);
+  border-color: var(--c-border);
+  color: var(--c-text);
+}
+[data-theme="dark"] .destaque-prato {
+  border-left-color: var(--c-orange);
+}
+[data-theme="dark"] .card-resultado h3,
+[data-theme="dark"] .sub-info,
+[data-theme="dark"] .plano-card p {
+  color: var(--c-muted);
+}
+[data-theme="dark"] .lista-ranking li {
+  border-bottom-color: var(--c-border);
+  color: var(--c-text);
+}
+[data-theme="dark"] .lista-ranking li::before {
+  background: var(--c-brown-2);
+  color: var(--c-orange);
+}
+[data-theme="dark"] .lista-ranking strong {
+  color: var(--c-text);
+}
+
+/* Alertas (estoque / alertas gerais): fundo escuro com borda esquerda colorida */
+[data-theme="dark"] .item-alerta,
+[data-theme="dark"] .alerta-item {
+  background: var(--c-brown-2);
+  color: var(--c-text);
+  border-left-color: var(--c-amarelo);
+}
+[data-theme="dark"] .alerta-item.lida {
+  background: var(--c-bg);
+  border-left-color: var(--c-border);
+  opacity: 0.65;
+}
+[data-theme="dark"] .alerta-msg {
+  color: var(--c-text);
+}
+[data-theme="dark"] .alerta-data {
+  color: var(--c-muted);
+}
+
+/* Plano destaque com leve brilho laranja */
+[data-theme="dark"] .plano-card.destaque {
+  background: linear-gradient(135deg, var(--c-brown-2), rgba(255, 159, 90, 0.12));
+  border-color: var(--c-orange);
 }
