@@ -1213,6 +1213,7 @@ const passosTour = [
   },
   {
     seletor: '#btn-add-ingrediente',
+    aba: 'ingredientes',
     titulo: 'Adicione seu primeiro ingrediente',
     texto: 'Preencha os campos acima e clique aqui para salvar. Você pode editar depois.'
   },
@@ -1243,6 +1244,11 @@ function iniciarTour() {
 
 function mostrarPassoTour() {
   const passo = passosTour[passoAtualTour];
+
+   if (passo.aba) {
+    abrirAba(passo.aba);
+  }
+
   const el = document.querySelector(passo.seletor);
 
   if (!el) {
