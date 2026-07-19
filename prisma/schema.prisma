@@ -51,6 +51,7 @@ model Fornecedor {
   restaurante   Restaurante   @relation(fields: [restauranteId], references: [id], onDelete: Cascade)
   restauranteId Int
   ingredientes  Ingrediente[]
+  precosIngredientes IngredienteFornecedor[]
 }
 
 model Ingrediente {
@@ -69,6 +70,7 @@ model Ingrediente {
   fichas           FichaTecnica[]
   movimentacoes    MovimentacaoEstoque[]
   historicoPrecos  HistoricoPreco[]
+  precosFornecedores IngredienteFornecedor[]
 }
 
 model Prato {
@@ -156,4 +158,18 @@ model RecuperacaoSenha {
   expiraEm  DateTime
   usado     Boolean  @default(false)
   criadoEm  DateTime @default(now())
+}
+
+model IngredienteFornecedor {
+  id             Int         @id @default(autoincrement())
+  ingrediente    Ingrediente @relation(fields: [ingredienteId], references: [id], onDelete: Cascade)
+  ingredienteId  Int
+  fornecedor     Fornecedor  @relation(fields: [fornecedorId], references: [id], onDelete: Cascade)
+  fornecedorId   Int
+  preco          Float
+  unidade        String?
+  atualizadoEm   DateTime    @updatedAt
+  criadoEm       DateTime    @default(now())
+
+  @@unique([ingredienteId, fornecedorId])
 }
