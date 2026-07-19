@@ -69,6 +69,20 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ message: 'Erro interno do servidor' });
 });
 
+const cron = require('node-cron');
+const { enviarRelatoriosPendentes } = require('./server/jobs/enviarRelatorios');
+
+// Roda todo dia às 8h da manhã (horário de Brasília = UTC-3, então 11h UTC)
+cron.schedule('0 11 * * *', async () => {
+  console.log('[cron] Verificando relatórios pendentes...');
+  try {
+    const resultado = await enviarRelatoriosPendentes();
+    console.log(`[cron] Relatórios: ${resultado.enviados}/${resultado.total} enviados`);
+  } catch (err) {
+    console.error('[cron] Erro ao executar job de relatórios:', err);
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🍳 CustoChef rodando na porta ${PORT}!`);
@@ -78,4 +92,4 @@ app.listen(PORT, () => {
   console.log(`  Negocio:     /ingredientes, /pratos, /fornecedores, /membros`);
   console.log(`  Insights:    /estoque, /dashboard, /simulador, /relatorios, /alertas`);
   console.log(`  Billing:     /billing`);
-});
+})
