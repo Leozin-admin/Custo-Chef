@@ -14,6 +14,7 @@ const membrosRoutes = require('./server/routes/membros');
 const relatoriosRoutes = require('./server/routes/relatorios');
 const billingRoutes = require('./server/routes/billing');
 const alertasRoutes = require('./server/routes/alertas');
+const ingredienteFornecedorRoutes = require('./server/routes/ingredienteFornecedor');
 
 const app = express();
 const { webhookHandler } = require('./server/webhook');
@@ -48,6 +49,7 @@ app.use('/membros', membrosRoutes);
 app.use('/relatorios', relatoriosRoutes);
 app.use('/billing', billingRoutes);
 app.use('/alertas', alertasRoutes);
+app.use('/ingrediente-fornecedor', ingredienteFornecedorRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
