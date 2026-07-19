@@ -38,6 +38,9 @@ model Restaurante {
   fornecedores  Fornecedor[]
   alertas       Alerta[]
   membros       Membro[]
+  relatorioEmailAtivo    Boolean   @default(false)
+  relatorioFrequencia    String    @default("semanal") // diario | semanal
+  relatorioUltimoEnvio   DateTime?
 }
 
 model Fornecedor {

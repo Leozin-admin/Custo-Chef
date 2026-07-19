@@ -1061,6 +1061,11 @@ function carregarConfig() {
   if (btnGerenciar) {
     btnGerenciar.style.display = (restaurante.plano && restaurante.plano !== 'free') ? 'inline-block' : 'none';
   }
+
+  const cbAtivo = document.getElementById('cfg-relatorio-ativo');
+  if (cbAtivo) cbAtivo.checked = !!restaurante.relatorioEmailAtivo;
+  const selFreq = document.getElementById('cfg-relatorio-frequencia');
+  if (selFreq) selFreq.value = restaurante.relatorioFrequencia || 'semanal';
 }
 
 async function salvarConfigRestaurante() {
@@ -1085,6 +1090,26 @@ async function salvarConfigRestaurante() {
   } else {
     const d = await res.json().catch(() => ({}));
     toast(d.message || 'Erro', 'erro');
+  }
+}
+
+async function salvarPreferenciaRelatorio() {
+  const ativo = document.getElementById('cfg-relatorio-ativo').checked;
+  const frequencia = document.getElementById('cfg-relatorio-frequencia').value;
+
+  const res = await fetchAuth(API + '/restaurante/relatorio-email', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ativo, frequencia })
+  });
+
+  if (res.ok) {
+    const r = await res.json();
+    restaurante = r;
+    toast('Preferência salva! 📧', 'sucesso');
+  } else {
+    const d = await res.json().catch(() => ({}));
+    toast(d.message || 'Erro ao salvar', 'erro');
   }
 }
 

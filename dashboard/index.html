@@ -604,6 +604,23 @@
         </div>
 
         <div class="secao">
+          <h2>📧 Relatório automático por email</h2>
+          <p class="subtitulo-secao">Receba um resumo do seu restaurante direto no email, sem precisar entrar no
+            sistema.</p>
+          <div class="form-grid form-grid-3">
+            <label class="check-label">
+              <input type="checkbox" id="cfg-relatorio-ativo">
+              Ativar envio automático
+            </label>
+            <select id="cfg-relatorio-frequencia">
+              <option value="semanal">Semanal (toda segunda-feira)</option>
+              <option value="diario">Diário</option>
+            </select>
+            <button class="btn-laranja" onclick="salvarPreferenciaRelatorio()">Salvar preferência</button>
+          </div>
+        </div>
+
+        <div class="secao">
           <h2>💎 Seu plano</h2>
           <p>Plano atual: <strong id="cfg-plano">Free</strong></p>
           <p class="subtitulo-secao">Escolha o plano ideal para o seu restaurante.</p>

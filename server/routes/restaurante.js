@@ -68,4 +68,23 @@ router.put('/', verificarToken, async (req, res) => {
   }
 });
 
+// PATCH /restaurante/relatorio-email
+router.patch('/relatorio-email', verificarToken, async (req, res) => {
+  try {
+    const { ativo, frequencia } = req.body;
+    const data = {};
+    if (ativo !== undefined) data.relatorioEmailAtivo = !!ativo;
+    if (frequencia && ['diario', 'semanal'].includes(frequencia)) data.relatorioFrequencia = frequencia;
+
+    const restaurante = await prisma.restaurante.update({
+      where: { usuarioId: req.usuario.id },
+      data
+    });
+    res.json(restaurante);
+  } catch (err) {
+    console.error('Erro em PATCH /restaurante/relatorio-email:', err);
+    res.status(500).json({ message: 'Erro ao atualizar preferência de relatório' });
+  }
+});
+
 module.exports = router;
