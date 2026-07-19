@@ -1235,3 +1235,60 @@ tfoot td {
   background: linear-gradient(135deg, var(--c-brown-2), rgba(255, 159, 90, 0.12));
   border-color: var(--c-orange);
 }
+
+/* Abas do modal de histórico/comparação de preços */
+.hist-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 16px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.hist-tab {
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--c-muted);
+  border-bottom: 2px solid transparent;
+}
+
+.hist-tab.ativa {
+  color: var(--c-orange-bright);
+  border-bottom: 2px solid var(--c-orange-bright);
+}
+
+.comp-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--c-cream);
+  border-radius: 8px;
+  border: 1px solid var(--c-border);
+}
+
+.comp-form select,
+.comp-form input {
+  padding: 8px;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  background: var(--c-bg);
+  color: var(--c-text);
+}
+
+.comp-form button {
+  background: var(--c-orange);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.linha-mais-barato {
+  background: rgba(46, 125, 50, 0.1);
+}

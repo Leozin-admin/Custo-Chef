@@ -352,6 +352,8 @@ async function editarIngrediente(id) {
 }
 
 async function verHistoricoPreco(id, nome) {
+  ingredienteAtualHistorico = { id, nome };
+  trocarAbaHistorico('historico');
   const res = await fetchAuth(API + '/ingredientes/' + id + '/historico-precos');
   if (!res.ok) return;
   const historico = await res.json();
@@ -1103,5 +1105,97 @@ async function salvarPerfil() {
   } else {
     const d = await res.json().catch(() => ({}));
     toast(d.message || 'Erro', 'erro');
+  }
+}
+
+let ingredienteAtualHistorico = null;
+
+function trocarAbaHistorico(aba) {
+  document.getElementById('tab-historico').classList.toggle('ativa', aba === 'historico');
+  document.getElementById('tab-fornecedores').classList.toggle('ativa', aba === 'fornecedores');
+  document.getElementById('painel-historico').style.display = aba === 'historico' ? 'block' : 'none';
+  document.getElementById('painel-fornecedores').style.display = aba === 'fornecedores' ? 'block' : 'none';
+
+  if (aba === 'fornecedores' && ingredienteAtualHistorico) {
+    renderFormComparacao();
+    carregarComparacaoFornecedores();
+  }
+}
+
+function renderFormComparacao() {
+  const form = document.getElementById('comp-form');
+  form.innerHTML = `
+    <select id="comp-fornecedor">
+      <option value="">Selecione o fornecedor</option>
+      ${fornecedoresCache.map(f => `<option value="${f.id}">${escapeHtml(f.nome)}</option>`).join('')}
+    </select>
+    <input type="number" step="0.01" id="comp-preco" placeholder="Preço (R$)">
+    <button type="button" onclick="salvarPrecoFornecedor()">Adicionar</button>
+  `;
+}
+
+async function carregarComparacaoFornecedores() {
+  const res = await fetchAuth(API + '/ingrediente-fornecedor/' + ingredienteAtualHistorico.id);
+  if (!res.ok) return;
+  const precos = await res.json();
+
+  const tabela = document.getElementById('comp-tabela');
+  if (!precos.length) {
+    tabela.innerHTML = '<p class="mensagem-vazia">Nenhum fornecedor cadastrado para este ingrediente ainda</p>';
+    return;
+  }
+
+  const menorPreco = Math.min(...precos.map(p => p.preco));
+
+  tabela.innerHTML = `<table><thead><tr><th>Fornecedor</th><th>Preço</th><th>Atualizado em</th><th></th></tr></thead><tbody>
+    ${precos.map(p => `
+      <tr class="${p.preco === menorPreco ? 'linha-mais-barato' : ''}">
+        <td>${escapeHtml(p.fornecedor.nome)}${p.preco === menorPreco ? ' 🏆' : ''}</td>
+        <td>R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}</td>
+        <td>${new Date(p.atualizadoEm).toLocaleDateString('pt-BR')}</td>
+        <td><button class="btn-icon" onclick="removerPrecoFornecedor(${p.id})" title="Remover">🗑️</button></td>
+      </tr>
+    `).join('')}
+  </tbody></table>`;
+}
+
+async function salvarPrecoFornecedor() {
+  const fornecedorId = document.getElementById('comp-fornecedor').value;
+  const preco = document.getElementById('comp-preco').value;
+
+  if (!fornecedorId || !preco) {
+    toast('Selecione o fornecedor e informe o preço', 'erro');
+    return;
+  }
+
+  const res = await fetchAuth(API + '/ingrediente-fornecedor', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ingredienteId: ingredienteAtualHistorico.id,
+      fornecedorId: parseInt(fornecedorId),
+      preco: parseFloat(preco)
+    })
+  });
+
+  if (res.ok) {
+    toast('Preço salvo!', 'sucesso');
+    document.getElementById('comp-preco').value = '';
+    await carregarComparacaoFornecedores();
+  } else {
+    const d = await res.json().catch(() => ({}));
+    toast(d.message || 'Erro ao salvar', 'erro');
+  }
+}
+
+async function removerPrecoFornecedor(id) {
+  const ok = await showConfirm('Remover este preço de fornecedor?');
+  if (!ok) return;
+  const res = await fetchAuth(API + '/ingrediente-fornecedor/' + id, { method: 'DELETE' });
+  if (res.ok) {
+    toast('Removido', 'sucesso');
+    await carregarComparacaoFornecedores();
+  } else {
+    toast('Erro ao remover', 'erro');
   }
 }

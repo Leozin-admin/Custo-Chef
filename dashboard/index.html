@@ -644,13 +644,29 @@
   </div>
 
   <!-- MODAL: Histórico de preços do ingrediente -->
+  <!-- MODAL: Histórico de preços do ingrediente -->
   <div id="modal-historico" style="display:none;">
     <div class="ui-modal-overlay" style="display:flex;">
       <div class="ui-modal">
         <button class="ui-modal-close" type="button"
           onclick="document.getElementById('modal-historico').style.display='none'">✕</button>
-        <h3 class="ui-modal-titulo">📈 Histórico de preços — <span id="hist-nome"></span></h3>
-        <div id="hist-tabela"></div>
+        <h3 class="ui-modal-titulo">📈 Preços — <span id="hist-nome"></span></h3>
+
+        <div class="hist-tabs">
+          <button type="button" class="hist-tab ativa" id="tab-historico"
+            onclick="trocarAbaHistorico('historico')">Histórico</button>
+          <button type="button" class="hist-tab" id="tab-fornecedores"
+            onclick="trocarAbaHistorico('fornecedores')">Comparar fornecedores</button>
+        </div>
+
+        <div id="painel-historico">
+          <div id="hist-tabela"></div>
+        </div>
+
+        <div id="painel-fornecedores" style="display:none;">
+          <div id="comp-form" class="comp-form"></div>
+          <div id="comp-tabela"></div>
+        </div>
       </div>
     </div>
   </div>
