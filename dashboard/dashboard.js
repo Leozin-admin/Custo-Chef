@@ -569,8 +569,14 @@ async function adicionarFicha() {
 }
 
 async function removerFicha(id) {
+  const ok = await showConfirm({
+    titulo: 'Remover item da ficha?',
+    mensagem: 'Este item será removido da ficha técnica do prato.'
+  });
+  if (!ok) return;
   const res = await fetchAuth(API + '/pratos/ficha/' + id, { method: 'DELETE' });
-  if (res.ok) { await carregarFicha(); await carregarPratos(); carregarVisaoGeral(); }
+  if (res.ok) { toast('Removido', 'sucesso'); await carregarFicha(); await carregarPratos(); carregarVisaoGeral(); }
+  else { const d = await res.json().catch(() => ({})); toast(d.message || 'Erro', 'erro'); }
 }
 
 function exportarFichaTecnicaPDF() {
