@@ -15,6 +15,7 @@ const relatoriosRoutes = require('./server/routes/relatorios');
 const billingRoutes = require('./server/routes/billing');
 const alertasRoutes = require('./server/routes/alertas');
 const ingredienteFornecedorRoutes = require('./server/routes/ingredienteFornecedor');
+const cronRoutes = require('./server/routes/cron');
 
 const app = express();
 const { webhookHandler } = require('./server/webhook');
@@ -50,6 +51,7 @@ app.use('/relatorios', relatoriosRoutes);
 app.use('/billing', billingRoutes);
 app.use('/alertas', alertasRoutes);
 app.use('/ingrediente-fornecedor', ingredienteFornecedorRoutes);
+app.use('/cron', cronRoutes);
 
 // Health check
 app.get('/health', (_req, res) => {
