@@ -127,6 +127,11 @@ async function init() {
   if (toggleBtn) {
     toggleBtn.addEventListener('click', alternarTema);
   }
+
+  // Tour automático para usuário novo (sem ingredientes e que nunca viu o tour)
+  if (ingredientesCache.length === 0 && !localStorage.getItem('tourConcluido')) {
+    setTimeout(iniciarTour, 600);
+  }
 }
 
 /* =========================================================
@@ -1198,4 +1203,89 @@ async function removerPrecoFornecedor(id) {
   } else {
     toast('Erro ao remover', 'erro');
   }
+}
+
+const passosTour = [
+  {
+    seletor: '[data-aba="ingredientes"]',
+    titulo: 'Passo 1 — Ingredientes',
+    texto: 'Comece cadastrando seus ingredientes aqui: nome, unidade, preço e estoque.'
+  },
+  {
+    seletor: '#btn-add-ingrediente',
+    titulo: 'Adicione seu primeiro ingrediente',
+    texto: 'Preencha os campos acima e clique aqui para salvar. Você pode editar depois.'
+  },
+  {
+    seletor: '[data-aba="pratos"]',
+    titulo: 'Passo 2 — Pratos',
+    texto: 'Agora cadastre os pratos do seu cardápio, com o preço de venda.'
+  },
+  {
+    seletor: '[data-aba="simulador"]',
+    titulo: 'Passo 3 — Simulador',
+    texto: 'Depois de montar a ficha técnica de um prato (ingredientes + quantidades), use o Simulador para descobrir a margem de lucro e o preço ideal.'
+  },
+  {
+    seletor: '#btn-sino',
+    titulo: 'Fique de olho nos alertas',
+    texto: 'Aqui você recebe avisos de estoque baixo automaticamente.'
+  }
+];
+
+let passoAtualTour = 0;
+
+function iniciarTour() {
+  passoAtualTour = 0;
+  document.getElementById('tour-overlay').style.display = 'block';
+  mostrarPassoTour();
+}
+
+function mostrarPassoTour() {
+  const passo = passosTour[passoAtualTour];
+  const el = document.querySelector(passo.seletor);
+
+  if (!el) {
+    proximoPassoTour();
+    return;
+  }
+
+  const rect = el.getBoundingClientRect();
+  const spotlight = document.getElementById('tour-spotlight');
+  spotlight.style.top = (rect.top - 6) + 'px';
+  spotlight.style.left = (rect.left - 6) + 'px';
+  spotlight.style.width = (rect.width + 12) + 'px';
+  spotlight.style.height = (rect.height + 12) + 'px';
+
+  const caixa = document.getElementById('tour-caixa');
+  document.getElementById('tour-titulo').textContent = passo.titulo;
+  document.getElementById('tour-texto').textContent = passo.texto;
+
+  let topCaixa = rect.bottom + 16;
+  if (topCaixa + 150 > window.innerHeight) {
+    topCaixa = rect.top - 166;
+  }
+  caixa.style.top = Math.max(16, topCaixa) + 'px';
+  caixa.style.left = Math.min(rect.left, window.innerWidth - 340) + 'px';
+
+  document.getElementById('tour-btn-proximo').textContent =
+    passoAtualTour === passosTour.length - 1 ? 'Concluir' : 'Próximo';
+}
+
+function proximoPassoTour() {
+  passoAtualTour++;
+  if (passoAtualTour >= passosTour.length) {
+    encerrarTour();
+    return;
+  }
+  mostrarPassoTour();
+}
+
+function pularTour() {
+  encerrarTour();
+}
+
+function encerrarTour() {
+  document.getElementById('tour-overlay').style.display = 'none';
+  localStorage.setItem('tourConcluido', 'true');
 }

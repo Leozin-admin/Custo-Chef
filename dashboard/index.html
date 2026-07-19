@@ -133,6 +133,9 @@
         <button id="btn-sino" class="dash-header-icon" onclick="abrirAba('alertas')" title="Alertas">
           🔔 <span id="badge-alertas" class="dash-badge" style="display:none">0</span>
         </button>
+        <button id="btn-tour" class="dash-header-icon" onclick="iniciarTour()" title="Ver tutorial">
+          ❓
+        </button>
         <button id="theme-toggle" class="dash-header-icon" title="Alternar tema claro/escuro">
           ☀️
         </button>
@@ -667,6 +670,19 @@
           <div id="comp-form" class="comp-form"></div>
           <div id="comp-tabela"></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOUR DE ONBOARDING -->
+  <div id="tour-overlay" style="display:none;">
+    <div id="tour-spotlight"></div>
+    <div id="tour-caixa">
+      <p id="tour-titulo"></p>
+      <p id="tour-texto"></p>
+      <div class="tour-acoes">
+        <button type="button" onclick="pularTour()" class="btn-ghost">Pular</button>
+        <button type="button" onclick="proximoPassoTour()" class="btn-laranja" id="tour-btn-proximo">Próximo</button>
       </div>
     </div>
   </div>

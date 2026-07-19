@@ -1292,3 +1292,57 @@ tfoot td {
 .linha-mais-barato {
   background: rgba(46, 125, 50, 0.1);
 }
+
+/* Tour de onboarding */
+#tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+#tour-spotlight {
+  position: fixed;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.65);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border: 2px solid var(--c-orange-bright);
+}
+
+#tour-caixa {
+  position: fixed;
+  background: var(--c-cream);
+  color: var(--c-text);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 320px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  z-index: 2001;
+}
+
+[data-theme="dark"] #tour-caixa {
+  background: #3a3937;
+  color: #f0efec;
+}
+
+#tour-titulo {
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--c-orange-bright);
+}
+
+#tour-texto {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: inherit;
+}
+
+.tour-acoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
