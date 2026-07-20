@@ -3,6 +3,7 @@ const prisma = require('../lib/prisma');
 const { verificarToken } = require('../middleware/auth');
 const { cmv: calcCmv, margem: calcMargem, classificarMargem } = require('../lib/calculos');
 const { verificarSugestaoPreco } = require('../lib/sugestaoPreco');
+const { checarLimite } = require('../lib/limitesPlano');
 
 const router = express.Router();
 
@@ -52,6 +53,11 @@ router.post('/', verificarToken, async (req, res) => {
 
     if (!nome || precoVenda === undefined) {
       return res.status(400).json({ message: 'Nome e preço de venda são obrigatórios' });
+    }
+
+    const limite = await checarLimite(restaurante.id, restaurante.plano, 'pratos');
+    if (!limite.permitido) {
+      return res.status(403).json({ message: limite.mensagem });
     }
 
     const prato = await prisma.prato.create({
