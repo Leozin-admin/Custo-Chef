@@ -2,6 +2,7 @@ const express = require('express');
 const prisma = require('../lib/prisma');
 const { verificarToken } = require('../middleware/auth');
 const { verificarAlertaEstoque } = require('../lib/alertas');
+const { verificarSugestaoPreco } = require('../lib/sugestaoPreco');
 
 const router = express.Router();
 
@@ -98,6 +99,15 @@ router.put('/:id', verificarToken, async (req, res) => {
 
     // Verifica alerta de estoque baixo
     await verificarAlertaEstoque(ingrediente);
+
+    // Reavalia a margem de todos os pratos que usam este ingrediente
+    const pratosAfetados = await prisma.prato.findMany({
+      where: { fichas: { some: { ingredienteId: id } } },
+      include: { fichas: { include: { ingrediente: true } } }
+    });
+    for (const prato of pratosAfetados) {
+      await verificarSugestaoPreco(prato);
+    }
 
     res.json(ingrediente);
   } catch (err) {

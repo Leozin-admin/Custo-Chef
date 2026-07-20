@@ -2,6 +2,7 @@ const express = require('express');
 const prisma = require('../lib/prisma');
 const { verificarToken } = require('../middleware/auth');
 const { cmv: calcCmv, margem: calcMargem, classificarMargem } = require('../lib/calculos');
+const { verificarSugestaoPreco } = require('../lib/sugestaoPreco');
 
 const router = express.Router();
 
@@ -90,6 +91,9 @@ router.put('/:id', verificarToken, async (req, res) => {
       },
       include: { fichas: { include: { ingrediente: true } } }
     });
+
+    await verificarSugestaoPreco(prato);
+
     res.json(pratoComCalculos(prato));
   } catch (err) {
     console.error('Erro em PUT /pratos/:id:', err);
@@ -139,6 +143,13 @@ router.post('/:id/ficha', verificarToken, async (req, res) => {
       },
       include: { ingrediente: true }
     });
+
+    const pratoAtualizado = await prisma.prato.findUnique({
+      where: { id: parseInt(req.params.id) },
+      include: { fichas: { include: { ingrediente: true } } }
+    });
+    await verificarSugestaoPreco(pratoAtualizado);
+
     res.status(201).json(ficha);
   } catch (err) {
     console.error('Erro em POST /pratos/:id/ficha:', err);
