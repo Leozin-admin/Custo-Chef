@@ -62,6 +62,10 @@ function alternarTema() {
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.MODO_DEMO) {
+    iniciarModoDemo();
+    return;
+  }
   if (!token) {
     window.location.href = '../auth/index.html';
     return;
@@ -76,6 +80,51 @@ document.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({}, '', window.location.pathname);
   }
 });
+
+function iniciarModoDemo() {
+  restaurante = window.DEMO.restaurante;
+  ingredientesCache = window.DEMO.ingredientes;
+  pratosCache = window.DEMO.pratos;
+  fornecedoresCache = window.DEMO.fornecedores;
+
+  document.getElementById('tela-setup').style.display = 'none';
+  document.getElementById('tela-dashboard').style.display = 'block';
+  document.getElementById('nome-rest').textContent = restaurante.nome + ' (Demonstração)';
+
+  renderIngredientes();
+  atualizarSelectFicha();
+  atualizarSelectFornecedor();
+  atualizarSelectMov();
+  renderPratos();
+  renderFornecedores();
+
+  // KPIs simplificados calculados a partir dos dados demo
+  const $ = id => document.getElementById(id);
+  $('kpi-ingredientes').textContent = ingredientesCache.length;
+  $('kpi-pratos').textContent = pratosCache.length;
+  $('kpi-pratos-ficha').textContent = pratosCache.filter(p => p.fichas?.length > 0).length;
+  const margemMedia = pratosCache.reduce((acc, p) => acc + p.margem, 0) / pratosCache.length;
+  $('kpi-margem-media').textContent = margemMedia.toFixed(1) + '%';
+  const valorEstoque = ingredientesCache.reduce((acc, i) => acc + i.estoqueAtual * i.precoPorUnidade, 0);
+  $('kpi-valor-estoque').textContent = 'R$ ' + valorEstoque.toFixed(2).replace('.', ',');
+  $('kpi-estoque-baixo').textContent = ingredientesCache.filter(i => i.estoqueAtual <= i.estoqueMinimo).length;
+  $('kpi-pratos-criticos').textContent = pratosCache.filter(p => p.margem < 35).length;
+  $('kpi-pratos-otimos').textContent = pratosCache.filter(p => p.margem >= 60).length;
+
+  const ordenados = [...pratosCache].sort((a, b) => b.margem - a.margem);
+  $('res-melhor-prato').textContent = `${ordenados[0].nome} (${ordenados[0].margem.toFixed(1)}%)`;
+  $('res-pior-prato').textContent = `${ordenados[ordenados.length - 1].nome} (${ordenados[ordenados.length - 1].margem.toFixed(1)}%)`;
+  $('top5').innerHTML = ordenados.slice(0, 5).map(p => `<li><strong>${escapeHtml(p.nome)}</strong> — ${p.margem.toFixed(1)}%</li>`).join('');
+  $('bottom5').innerHTML = [...ordenados].reverse().slice(0, 5).map(p => `<li><strong>${escapeHtml(p.nome)}</strong> — ${p.margem.toFixed(1)}%</li>`).join('');
+
+  // Banner fixo avisando que é demo
+  const aviso = document.createElement('div');
+  aviso.style.cssText = 'position:fixed;bottom:16px;right:16px;background:var(--c-orange-bright);color:white;padding:12px 20px;border-radius:10px;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:3000;';
+  aviso.innerHTML = '👀 Modo demonstração — <a href="../auth/index.html?tela=cadastro" style="color:white;text-decoration:underline;">Criar minha conta grátis</a>';
+  document.body.appendChild(aviso);
+
+  aplicarTema();
+}
 
 async function init() {
   const res = await fetchAuth(API + '/restaurante');
