@@ -324,6 +324,7 @@ function renderIngredientes() {
 }
 
 async function adicionarIngrediente() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — criação desabilitada', 'info'); return; }
   const campos = [
     { name: 'nome', label: 'Nome', value: document.getElementById('ing-nome').value.trim(), required: true },
     { name: 'unidade', label: 'Unidade', value: document.getElementById('ing-unidade').value.trim(), required: true },
@@ -365,6 +366,7 @@ async function adicionarIngrediente() {
 }
 
 async function removerIngrediente(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm({
     titulo: 'Remover ingrediente?',
     mensagem: 'Essa ação não pode ser desfeita.'
@@ -376,6 +378,7 @@ async function removerIngrediente(id) {
 }
 
 async function editarIngrediente(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — edição desabilitada', 'info'); return; }
   const ing = ingredientesCache.find(i => i.id === id);
   if (!ing) return;
   const valores = await showForm({
@@ -481,6 +484,7 @@ function renderPratos() {
 }
 
 async function adicionarPrato() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — criação desabilitada', 'info'); return; }
   const nome = document.getElementById('prato-nome').value.trim();
   const precoVenda = parseFloat(document.getElementById('prato-preco').value);
   if (!nome || isNaN(precoVenda)) { toast('Preencha nome e preço', 'erro'); return; }
@@ -514,6 +518,7 @@ async function adicionarPrato() {
 }
 
 async function removerPrato(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm({
     titulo: 'Remover prato?',
     mensagem: 'A ficha técnica também será removida.'
@@ -525,6 +530,7 @@ async function removerPrato(id) {
 }
 
 async function editarPrato(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — edição desabilitada', 'info'); return; }
   const p = pratosCache.find(x => x.id === id);
   if (!p) return;
   const valores = await showForm({
@@ -603,6 +609,7 @@ function atualizarSelectFicha() {
 }
 
 async function adicionarFicha() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — criação desabilitada', 'info'); return; }
   const ingredienteId = parseInt(document.getElementById('ficha-ingrediente').value);
   const quantidade = parseFloat(document.getElementById('ficha-quantidade').value);
   if (!ingredienteId || isNaN(quantidade)) { toast('Selecione ingrediente e quantidade', 'erro'); return; }
@@ -625,6 +632,7 @@ async function adicionarFicha() {
 }
 
 async function removerFicha(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm({
     titulo: 'Remover item da ficha?',
     mensagem: 'Este item será removido da ficha técnica do prato.'
@@ -678,6 +686,7 @@ function renderFornecedores() {
 }
 
 async function adicionarFornecedor() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — criação desabilitada', 'info'); return; }
   const payload = {
     nome: document.getElementById('forn-nome').value.trim(),
     contato: document.getElementById('forn-contato').value.trim() || null,
@@ -705,6 +714,7 @@ async function adicionarFornecedor() {
 }
 
 async function editarFornecedor(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — edição desabilitada', 'info'); return; }
   const f = fornecedoresCache.find(x => x.id === id);
   if (!f) return;
   const valores = await showForm({
@@ -729,6 +739,7 @@ async function editarFornecedor(id) {
 }
 
 async function removerFornecedor(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm({ titulo: 'Remover fornecedor?', mensagem: 'Os ingredientes vinculados deixarão de ter fornecedor.' });
   if (!ok) return;
   const res = await fetchAuth(API + '/fornecedores/' + id, { method: 'DELETE' });
@@ -800,6 +811,7 @@ function atualizarSelectMov() {
 }
 
 async function registrarMovimentacao() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — registro desabilitado', 'info'); return; }
   const ingredienteId = parseInt(document.getElementById('mov-ingrediente').value);
   const tipo = document.getElementById('mov-tipo').value;
   const quantidade = parseFloat(document.getElementById('mov-quantidade').value);
@@ -984,6 +996,7 @@ async function carregarMembros() {
 }
 
 async function convidarMembro() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — convite desabilitado', 'info'); return; }
   const email = document.getElementById('mem-email').value.trim();
   const papel = document.getElementById('mem-papel').value;
   if (!email) { toast('Email obrigatório', 'erro'); return; }
@@ -1026,6 +1039,7 @@ async function alterarPapelMembro(id, papelAtual) {
 }
 
 async function removerMembro(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm({ titulo: 'Remover membro?', mensagem: 'O usuário deixará de ter acesso ao restaurante.' });
   if (!ok) return;
   const res = await fetchAuth(API + '/membros/' + id, { method: 'DELETE' });
@@ -1074,17 +1088,20 @@ async function carregarAlertas() {
 }
 
 async function marcarAlertaLida(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — ação desabilitada', 'info'); return; }
   await fetchAuth(API + '/dashboard/' + id + '/lida', { method: 'PATCH' });
   await carregarAlertas();
   await carregarAlertasContador();
 }
 
 async function marcarTodasAlertas() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — ação desabilitada', 'info'); return; }
   const res = await fetchAuth(API + '/dashboard/marcar-todas', { method: 'POST' });
   if (res.ok) { toast('Todas marcadas como lidas', 'sucesso'); await carregarAlertas(); await carregarAlertasContador(); }
 }
 
 async function deletarAlerta(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   await fetchAuth(API + '/dashboard/' + id, { method: 'DELETE' });
   await carregarAlertas();
   await carregarAlertasContador();
@@ -1118,6 +1135,7 @@ function carregarConfig() {
 }
 
 async function salvarConfigRestaurante() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — edição desabilitada', 'info'); return; }
   const payload = {
     nome: document.getElementById('cfg-nome').value.trim(),
     email: document.getElementById('cfg-email').value.trim() || null,
@@ -1143,6 +1161,7 @@ async function salvarConfigRestaurante() {
 }
 
 async function salvarPreferenciaRelatorio() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — preferência não salva', 'info'); return; }
   const ativo = document.getElementById('cfg-relatorio-ativo').checked;
   const frequencia = document.getElementById('cfg-relatorio-frequencia').value;
 
@@ -1163,6 +1182,7 @@ async function salvarPreferenciaRelatorio() {
 }
 
 async function salvarPerfil() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — edição desabilitada', 'info'); return; }
   const payload = {
     nome: document.getElementById('perfil-nome').value.trim(),
     email: document.getElementById('perfil-email').value.trim(),
@@ -1239,6 +1259,7 @@ async function carregarComparacaoFornecedores() {
 }
 
 async function salvarPrecoFornecedor() {
+  if (window.MODO_DEMO) { toast('Modo demonstração — registro desabilitado', 'info'); return; }
   const fornecedorId = document.getElementById('comp-fornecedor').value;
   const preco = document.getElementById('comp-preco').value;
 
@@ -1268,6 +1289,7 @@ async function salvarPrecoFornecedor() {
 }
 
 async function removerPrecoFornecedor(id) {
+  if (window.MODO_DEMO) { toast('Modo demonstração — exclusão desabilitada', 'info'); return; }
   const ok = await showConfirm('Remover este preço de fornecedor?');
   if (!ok) return;
   const res = await fetchAuth(API + '/ingrediente-fornecedor/' + id, { method: 'DELETE' });

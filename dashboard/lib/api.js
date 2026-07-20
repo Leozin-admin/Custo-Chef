@@ -3,7 +3,14 @@
    - Detecta automaticamente o host (localhost em dev, mesmo host em prod)
    - fetchAuth(): fetch com Authorization + refresh automático em 401/403
    - Token management (get/set/clear)
+   - Detecta ?demo=1 na URL e ativa MODO_DEMO (bloqueia POST/PUT/PATCH/DELETE)
    ========================================================= */
+
+// Detecção do modo demonstração via query string (?demo=1).
+// Lida uma única vez no carregamento do script. Os handlers de escrita em
+// fetchAuth() checam esta flag para bloquear requisições de mutação.
+const MODO_DEMO = new URLSearchParams(window.location.search).get('demo') === '1';
+const METHODS_BLOQUEADOS_DEMO = new Set(['POST', 'PUT', 'PATCH', 'DELETE']);
 
 const API = (function () {
   const host = window.location.hostname;
@@ -66,6 +73,17 @@ async function fetchAuth(url, options = {}) {
     return fetch(url, options);
   }
 
+  // Modo demonstração: bloqueia requisições de escrita para não mutar dados reais.
+  // Retornamos uma Response mockada com 403 em vez de lançar exceção, porque o
+  // dashboard.js (e outros) sempre esperam um objeto Response e checam res.ok.
+  const method = (options.method || 'GET').toUpperCase();
+  if (MODO_DEMO && METHODS_BLOQUEADOS_DEMO.has(method)) {
+    return new Response(
+      JSON.stringify({ erro: 'Modo demonstração — operação bloqueada' }),
+      { status: 403, statusText: 'Forbidden', headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   const headers = { ...(options.headers || {}) };
   const token = TokenStore.get();
   if (token) headers['Authorization'] = 'Bearer ' + token;
@@ -102,6 +120,7 @@ window.API = API;
 window.TokenStore = TokenStore;
 window.fetchAuth = fetchAuth;
 window.logout = logout;
+window.MODO_DEMO = MODO_DEMO;
 
 async function iniciarCheckout(plano) {
   const res = await fetchAuth(API + '/billing/checkout', {
