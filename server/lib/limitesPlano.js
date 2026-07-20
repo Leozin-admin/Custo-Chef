@@ -4,7 +4,7 @@
 const prisma = require('./prisma');
 
 const LIMITES = {
-  free: { ingredientes: 1, pratos: 1, membros: 1 },
+  free: { ingredientes: 10, pratos: 5, membros: 1 },
   pro: { ingredientes: Infinity, pratos: Infinity, membros: Infinity },
   enterprise: { ingredientes: Infinity, pratos: Infinity, membros: Infinity }
 };
