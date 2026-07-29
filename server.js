@@ -1,3 +1,7 @@
+require("./lib/instrument.js");
+
+const Sentry = require("@sentry/node");
+
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -62,6 +66,9 @@ app.get('/health', (_req, res) => {
 app.use((_req, res) => {
   res.status(404).json({ message: 'Endpoint não encontrado' });
 });
+
+// Error handler do Sentry (precisa vir ANTES do middleware de erro customizado)
+Sentry.setupExpressErrorHandler(app);
 
 // Erro genérico
 app.use((err, _req, res, _next) => {
