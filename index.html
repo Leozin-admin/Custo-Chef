@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>CustoChef</title>
+  <meta http-equiv="refresh" content="0; url=landing/index.html">
+  <link rel="canonical" href="landing/index.html">
 </head>
 <body>
+  <p>Redirecionando para a <a href="landing/index.html">página inicial</a>...</p>
   <script>
-    // Se tem token salvo, vai pro dashboard; senão, vai pra landing
+    // Fallback em JS caso a meta refresh não funcione em algum navegador
     if (localStorage.getItem('token')) {
       window.location.replace('dashboard/index.html');
     } else {
       window.location.replace('landing/index.html');
     }
   </script>
-  <noscript>
-    <p>JavaScript desabilitado. <a href="landing/index.html">Ir para a página inicial</a>.</p>
-  </noscript>
 </body>
 </html>
