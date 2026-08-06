@@ -7,7 +7,7 @@ const API = (function () {
   if (host === 'localhost' || host.startsWith('127.')) {
     return 'http://localhost:3000';
   }
-  return 'https://custo-chef-production.up.railway.app';
+  return 'https://custo-chef-backend.onrender.com';
 })();
 
 // Lê token da URL (caso venha do link de recuperação)

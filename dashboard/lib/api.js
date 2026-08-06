@@ -19,7 +19,7 @@ const API = (function () {
     return 'http://localhost:3000';
   }
   // Em produção, o backend mora no Railway
-  return 'https://custo-chef-production.up.railway.app';
+  return 'https://custo-chef-backend.onrender.com';
 })();
 
 const TokenStore = {
