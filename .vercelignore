@@ -1,1 +1,8 @@
+server.js
+server/
+prisma/
 .env
+lib/
+node_modules/
+package.json
+package-lock.json
